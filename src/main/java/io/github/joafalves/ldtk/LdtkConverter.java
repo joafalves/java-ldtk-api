@@ -66,7 +66,7 @@ public class LdtkConverter {
         mapper.findAndRegisterModules();
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         SimpleModule module = new SimpleModule();
-        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<>() {
+        module.addDeserializer(OffsetDateTime.class, new JsonDeserializer<OffsetDateTime>() {
             @Override
             public OffsetDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
                     throws IOException {

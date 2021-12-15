@@ -1,5 +1,6 @@
 package io.github.joafalves.ldtk;
 
+import io.github.joafalves.ldtk.model.Project;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +13,7 @@ public class LdtkConverterTest {
 
     @Test
     public void loadTest() throws IOException {
-        var project = LdtkConverter.fromJsonString(loadResourceFile("./data.json"));
+        Project project = LdtkConverter.fromJsonString(loadResourceFile("./data.json"));
         Assertions.assertNotNull(project);
     }
 
