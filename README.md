@@ -2,7 +2,7 @@
 
 ### What is this repository for? ###
 
-This repository contains a full data model based on the latest API schema of LDTK (extracted). In addition, also
+This repository contains a full data model based on the latest API schema of [LDTK](https://ldtk.io/) (extracted). In addition, also
 provides a set of tools to generate the data model from the API schema (converters).
 
 ### Examples ##
