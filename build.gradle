@@ -1,0 +1,31 @@
+apply plugin: 'java'
+apply plugin: 'java-library'
+
+version = '1.0'
+
+repositories {
+    mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+    // org.json
+    api 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0'
+
+    // log4j2
+    implementation 'org.apache.logging.log4j:log4j-api:2.16.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.16.0'
+
+    // lombok
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    // test:
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+test {22
+    useJUnitPlatform()
+}
