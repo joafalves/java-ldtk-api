@@ -2,8 +2,8 @@
 
 ### What is this repository for? ###
 
-This repository contains a full data model based on the latest API schema of [LDTK](https://ldtk.io/) (extracted). In addition, also
-provides a set of tools to generate the data model from the API schema (converters).
+This repository contains a full data model based on the latest API schema of [LDTK](https://ldtk.io/) (schema-extracted)
+. In addition, also provides a set of converters to load the data model from a valid JSON source file.
 
 ### Examples ##
 
@@ -13,7 +13,7 @@ Load the data model from a valid LDTK json file:
 
 ### Project Structure ###
 
-The framework functionality is divided into multiple modules which can be imported individually as required.
+This project is structured as follows:
 
 ##### Root Directory Structure #####
 
