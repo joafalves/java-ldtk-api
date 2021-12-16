@@ -1,5 +1,8 @@
 # Java LDTK API data library
 
+![](https://img.shields.io/badge/java-%3E%3D%208-green)
+![](https://img.shields.io/badge/latest%20version-0.9.3-blue)
+
 ### What is this repository for? ###
 
 This repository contains a full data model based on the latest API schema of [LDTK](https://ldtk.io/) (schema-extracted)
