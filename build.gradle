@@ -3,7 +3,7 @@ apply plugin: 'java-library'
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-version = '1.0.0'
+version = '0.9.3'
 
 repositories {
     mavenCentral()
