@@ -5,11 +5,45 @@
 This repository contains a full data model based on the latest API schema of [LDTK](https://ldtk.io/) (schema-extracted)
 . In addition, also provides a set of converters to load the data model from a valid JSON source file.
 
-### Examples ##
+### Examples ###
 
 Load the data model from a valid LDTK json file:
 
 `var projectData = LdtkConverter.fromJsonString(loadResourceFile("./data.json"));`
+
+### Importing ###
+
+The library is available as a Maven dependency on
+repo [s01.oss.sonatype.org](https://s01.oss.sonatype.org/content/repositories/releases/) with the following coordinates:
+
+`io.github.joafalves:java-ldtk-api`
+
+Notice that the version matches the JSON version of the data model (minimum version is '0.9.3').
+
+**Repository:**
+
+`https://s01.oss.sonatype.org/content/repositories/releases/`
+
+**Gradle Import:** 
+
+```
+repositories {
+    maven { url 'https://s01.oss.sonatype.org/content/repositories/releases/' }
+}
+
+dependencies {
+    implementation 'io.github.joafalves:java-ldtk-api'
+}
+```
+
+**Maven Import:**
+
+```
+<dependency>
+    <groupId>io.github.joafalves</groupId>
+    <artifactId>java-ldtk-api</artifactId>
+</dependency>
+```
 
 ### Project Structure ###
 
