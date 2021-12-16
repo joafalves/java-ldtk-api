@@ -35,7 +35,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.joafalves:java-ldtk-api'
+    implementation 'io.github.joafalves:java-ldtk-api:latest.release'
 }
 ```
 
