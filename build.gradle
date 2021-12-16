@@ -1,7 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
-version = '1.0'
+version = '1.0.0'
 
 repositories {
     mavenCentral()
@@ -24,4 +26,75 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+task sourceJar(type: Jar) {
+    classifier "sources"
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier "javadoc"
+    from javadoc.destinationDir
+}
+
+signing {
+    if (rootProject.hasProperty("signing.keyId")) {
+        sign(publishing.publications) // sign everything to be published
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId 'io.github.joafalves'
+            artifactId project.name
+            version rootProject.version
+
+            from components.java
+
+            artifact(sourceJar) {
+                classifier = 'sources'
+            }
+
+            artifact(javadocJar) {
+                classifier = 'javadoc'
+            }
+
+            pom {
+                name = 'Java LDTK API data library'
+                description = 'Java LDTK API utility library for loading LDTK json files into data classes.'
+                url = 'https://github.com/joafalves/java-ldtk-api'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'jfalves'
+                        name = 'João Alves'
+                        email = 'joao.cpp.sca@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/joafalves/java-ldtk-api.git'
+                    developerConnection = 'scm:git:ssh://github.com/joafalves/java-ldtk-api.git'
+                    url = 'https://github.com/joafalves/java-ldtk-api'
+                }
+            }
+        }
+    }
+    repositories {
+        if (rootProject.hasProperty("sonatypeUsername") && rootProject.hasProperty("sonatypePassword")) {
+            maven {
+                url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
+                credentials {
+                    username sonatypeUsername
+                    password sonatypePassword
+                }
+            }
+        }
+    }
 }

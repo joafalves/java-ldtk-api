@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * Possible values: `DiscardOldOnes`, `PreventAdding`, `MoveLastOne`
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public enum LimitBehavior {
     DISCARD_OLD_ONES, MOVE_LAST_ONE, PREVENT_ADDING;
 

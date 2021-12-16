@@ -3,25 +3,57 @@ package io.github.joafalves.ldtk.model;
 import com.fasterxml.jackson.annotation.*;
 import java.util.List;
 
-@lombok.Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EnumDefinition {
-    @lombok.Getter(onMethod_ = {@JsonProperty("externalFileChecksum")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("externalFileChecksum")})
     private String externalFileChecksum;
-    @lombok.Getter(onMethod_ = {@JsonProperty("externalRelPath")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("externalRelPath")})
     private String externalRelPath;
-    @lombok.Getter(onMethod_ = {@JsonProperty("iconTilesetUid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("iconTilesetUid")})
     private Long iconTilesetUid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("identifier")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("identifier")})
     private String identifier;
-    @lombok.Getter(onMethod_ = {@JsonProperty("uid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("uid")})
     private long uid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("values")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("values")})
     private List<EnumValueDefinition> values;
+
+    @JsonProperty("externalFileChecksum")
+    public String getExternalFileChecksum() { return externalFileChecksum; }
+    @JsonProperty("externalFileChecksum")
+    public void setExternalFileChecksum(String value) { this.externalFileChecksum = value; }
+
+    /**
+     * Relative path to the external file providing this Enum
+     */
+    @JsonProperty("externalRelPath")
+    public String getExternalRelPath() { return externalRelPath; }
+    @JsonProperty("externalRelPath")
+    public void setExternalRelPath(String value) { this.externalRelPath = value; }
+
+    /**
+     * Tileset UID if provided
+     */
+    @JsonProperty("iconTilesetUid")
+    public Long getIconTilesetUid() { return iconTilesetUid; }
+    @JsonProperty("iconTilesetUid")
+    public void setIconTilesetUid(Long value) { this.iconTilesetUid = value; }
+
+    /**
+     * Unique String identifier
+     */
+    @JsonProperty("identifier")
+    public String getIdentifier() { return identifier; }
+    @JsonProperty("identifier")
+    public void setIdentifier(String value) { this.identifier = value; }
+
+    /**
+     * Unique Int identifier
+     */
+    @JsonProperty("uid")
+    public long getUid() { return uid; }
+    @JsonProperty("uid")
+    public void setUid(long value) { this.uid = value; }
+
+    /**
+     * All possible enum values, with their optional Tile infos.
+     */
+    @JsonProperty("values")
+    public List<EnumValueDefinition> getValues() { return values; }
+    @JsonProperty("values")
+    public void setValues(List<EnumValueDefinition> value) { this.values = value; }
 }

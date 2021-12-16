@@ -3,76 +3,216 @@ package io.github.joafalves.ldtk.model;
 import com.fasterxml.jackson.annotation.*;
 import java.util.List;
 
-@lombok.Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LayerInstance {
-    @lombok.Getter(onMethod_ = {@JsonProperty("__cHei")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__cHei")})
     private long cHei;
-    @lombok.Getter(onMethod_ = {@JsonProperty("__cWid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__cWid")})
     private long cWid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("__gridSize")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__gridSize")})
     private long gridSize;
-    @lombok.Getter(onMethod_ = {@JsonProperty("__identifier")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__identifier")})
     private String identifier;
-    @lombok.Getter(onMethod_ = {@JsonProperty("__opacity")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__opacity")})
     private double opacity;
-    @lombok.Getter(onMethod_ = {@JsonProperty("__pxTotalOffsetX")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__pxTotalOffsetX")})
     private long pxTotalOffsetX;
-    @lombok.Getter(onMethod_ = {@JsonProperty("__pxTotalOffsetY")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__pxTotalOffsetY")})
     private long pxTotalOffsetY;
-    @lombok.Getter(onMethod_ = {@JsonProperty("__tilesetDefUid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__tilesetDefUid")})
     private Long tilesetDefUid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("__tilesetRelPath")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__tilesetRelPath")})
     private String tilesetRelPath;
-    @lombok.Getter(onMethod_ = {@JsonProperty("__type")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__type")})
     private String type;
-    @lombok.Getter(onMethod_ = {@JsonProperty("autoLayerTiles")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("autoLayerTiles")})
     private List<TileInstance> autoLayerTiles;
-    @lombok.Getter(onMethod_ = {@JsonProperty("entityInstances")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("entityInstances")})
     private List<EntityInstance> entityInstances;
-    @lombok.Getter(onMethod_ = {@JsonProperty("gridTiles")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("gridTiles")})
     private List<TileInstance> gridTiles;
-    @lombok.Getter(onMethod_ = {@JsonProperty("intGrid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("intGrid")})
     private List<IntGridValueInstance> intGrid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("intGridCsv")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("intGridCsv")})
     private List<Long> intGridCSV;
-    @lombok.Getter(onMethod_ = {@JsonProperty("layerDefUid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("layerDefUid")})
     private long layerDefUid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("levelId")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("levelId")})
     private long levelID;
-    @lombok.Getter(onMethod_ = {@JsonProperty("optionalRules")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("optionalRules")})
     private List<Long> optionalRules;
-    @lombok.Getter(onMethod_ = {@JsonProperty("overrideTilesetUid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("overrideTilesetUid")})
     private Long overrideTilesetUid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("pxOffsetX")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("pxOffsetX")})
     private long pxOffsetX;
-    @lombok.Getter(onMethod_ = {@JsonProperty("pxOffsetY")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("pxOffsetY")})
     private long pxOffsetY;
-    @lombok.Getter(onMethod_ = {@JsonProperty("seed")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("seed")})
     private long seed;
-    @lombok.Getter(onMethod_ = {@JsonProperty("visible")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("visible")})
     private boolean visible;
+
+    /**
+     * Grid-based height
+     */
+    @JsonProperty("__cHei")
+    public long getCHei() { return cHei; }
+    @JsonProperty("__cHei")
+    public void setCHei(long value) { this.cHei = value; }
+
+    /**
+     * Grid-based width
+     */
+    @JsonProperty("__cWid")
+    public long getCWid() { return cWid; }
+    @JsonProperty("__cWid")
+    public void setCWid(long value) { this.cWid = value; }
+
+    /**
+     * Grid size
+     */
+    @JsonProperty("__gridSize")
+    public long getGridSize() { return gridSize; }
+    @JsonProperty("__gridSize")
+    public void setGridSize(long value) { this.gridSize = value; }
+
+    /**
+     * Layer definition identifier
+     */
+    @JsonProperty("__identifier")
+    public String getIdentifier() { return identifier; }
+    @JsonProperty("__identifier")
+    public void setIdentifier(String value) { this.identifier = value; }
+
+    /**
+     * Layer opacity as Float [0-1]
+     */
+    @JsonProperty("__opacity")
+    public double getOpacity() { return opacity; }
+    @JsonProperty("__opacity")
+    public void setOpacity(double value) { this.opacity = value; }
+
+    /**
+     * Total layer X pixel offset, including both instance and definition offsets.
+     */
+    @JsonProperty("__pxTotalOffsetX")
+    public long getPxTotalOffsetX() { return pxTotalOffsetX; }
+    @JsonProperty("__pxTotalOffsetX")
+    public void setPxTotalOffsetX(long value) { this.pxTotalOffsetX = value; }
+
+    /**
+     * Total layer Y pixel offset, including both instance and definition offsets.
+     */
+    @JsonProperty("__pxTotalOffsetY")
+    public long getPxTotalOffsetY() { return pxTotalOffsetY; }
+    @JsonProperty("__pxTotalOffsetY")
+    public void setPxTotalOffsetY(long value) { this.pxTotalOffsetY = value; }
+
+    /**
+     * The definition UID of corresponding Tileset, if any.
+     */
+    @JsonProperty("__tilesetDefUid")
+    public Long getTilesetDefUid() { return tilesetDefUid; }
+    @JsonProperty("__tilesetDefUid")
+    public void setTilesetDefUid(Long value) { this.tilesetDefUid = value; }
+
+    /**
+     * The relative path to corresponding Tileset, if any.
+     */
+    @JsonProperty("__tilesetRelPath")
+    public String getTilesetRelPath() { return tilesetRelPath; }
+    @JsonProperty("__tilesetRelPath")
+    public void setTilesetRelPath(String value) { this.tilesetRelPath = value; }
+
+    /**
+     * Layer type (possible values: IntGrid, Entities, Tiles or AutoLayer)
+     */
+    @JsonProperty("__type")
+    public String getType() { return type; }
+    @JsonProperty("__type")
+    public void setType(String value) { this.type = value; }
+
+    /**
+     * An array containing all tiles generated by Auto-layer rules. The array is already sorted
+     * in display order (ie. 1st tile is beneath 2nd, which is beneath 3rd etc.).
+     * Note: if multiple tiles are stacked in the same cell as the result of different rules,
+     * all tiles behind opaque ones will be discarded.
+     */
+    @JsonProperty("autoLayerTiles")
+    public List<TileInstance> getAutoLayerTiles() { return autoLayerTiles; }
+    @JsonProperty("autoLayerTiles")
+    public void setAutoLayerTiles(List<TileInstance> value) { this.autoLayerTiles = value; }
+
+    @JsonProperty("entityInstances")
+    public List<EntityInstance> getEntityInstances() { return entityInstances; }
+    @JsonProperty("entityInstances")
+    public void setEntityInstances(List<EntityInstance> value) { this.entityInstances = value; }
+
+    @JsonProperty("gridTiles")
+    public List<TileInstance> getGridTiles() { return gridTiles; }
+    @JsonProperty("gridTiles")
+    public void setGridTiles(List<TileInstance> value) { this.gridTiles = value; }
+
+    /**
+     * **WARNING**: this deprecated value will be *removed* completely on version 0.10.0+
+     * Replaced by: `intGridCsv`
+     */
+    @JsonProperty("intGrid")
+    public List<IntGridValueInstance> getIntGrid() { return intGrid; }
+    @JsonProperty("intGrid")
+    public void setIntGrid(List<IntGridValueInstance> value) { this.intGrid = value; }
+
+    /**
+     * A list of all values in the IntGrid layer, stored from left to right, and top to bottom
+     * (ie. first row from left to right, followed by second row, etc). `0` means "empty cell"
+     * and IntGrid values start at 1. This array size is `__cWid` x `__cHei` cells.
+     */
+    @JsonProperty("intGridCsv")
+    public List<Long> getIntGridCSV() { return intGridCSV; }
+    @JsonProperty("intGridCsv")
+    public void setIntGridCSV(List<Long> value) { this.intGridCSV = value; }
+
+    /**
+     * Reference the Layer definition UID
+     */
+    @JsonProperty("layerDefUid")
+    public long getLayerDefUid() { return layerDefUid; }
+    @JsonProperty("layerDefUid")
+    public void setLayerDefUid(long value) { this.layerDefUid = value; }
+
+    /**
+     * Reference to the UID of the level containing this layer instance
+     */
+    @JsonProperty("levelId")
+    public long getLevelID() { return levelID; }
+    @JsonProperty("levelId")
+    public void setLevelID(long value) { this.levelID = value; }
+
+    /**
+     * An Array containing the UIDs of optional rules that were enabled in this specific layer
+     * instance.
+     */
+    @JsonProperty("optionalRules")
+    public List<Long> getOptionalRules() { return optionalRules; }
+    @JsonProperty("optionalRules")
+    public void setOptionalRules(List<Long> value) { this.optionalRules = value; }
+
+    /**
+     * This layer can use another tileset by overriding the tileset UID here.
+     */
+    @JsonProperty("overrideTilesetUid")
+    public Long getOverrideTilesetUid() { return overrideTilesetUid; }
+    @JsonProperty("overrideTilesetUid")
+    public void setOverrideTilesetUid(Long value) { this.overrideTilesetUid = value; }
+
+    /**
+     * X offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
+     * the `LayerDef` optional offset, see `__pxTotalOffsetX`)
+     */
+    @JsonProperty("pxOffsetX")
+    public long getPxOffsetX() { return pxOffsetX; }
+    @JsonProperty("pxOffsetX")
+    public void setPxOffsetX(long value) { this.pxOffsetX = value; }
+
+    /**
+     * Y offset in pixels to render this layer, usually 0 (IMPORTANT: this should be added to
+     * the `LayerDef` optional offset, see `__pxTotalOffsetY`)
+     */
+    @JsonProperty("pxOffsetY")
+    public long getPxOffsetY() { return pxOffsetY; }
+    @JsonProperty("pxOffsetY")
+    public void setPxOffsetY(long value) { this.pxOffsetY = value; }
+
+    /**
+     * Random seed used for Auto-Layers rendering
+     */
+    @JsonProperty("seed")
+    public long getSeed() { return seed; }
+    @JsonProperty("seed")
+    public void setSeed(long value) { this.seed = value; }
+
+    /**
+     * Layer instance visibility
+     */
+    @JsonProperty("visible")
+    public boolean getVisible() { return visible; }
+    @JsonProperty("visible")
+    public void setVisible(boolean value) { this.visible = value; }
 }

@@ -3,25 +3,42 @@ package io.github.joafalves.ldtk.model;
 import com.fasterxml.jackson.annotation.*;
 import java.util.List;
 
-@lombok.Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AutoLayerRuleGroup {
-    @lombok.Getter(onMethod_ = {@JsonProperty("active")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("active")})
     private boolean active;
-    @lombok.Getter(onMethod_ = {@JsonProperty("collapsed")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("collapsed")})
     private boolean collapsed;
-    @lombok.Getter(onMethod_ = {@JsonProperty("isOptional")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("isOptional")})
     private boolean isOptional;
-    @lombok.Getter(onMethod_ = {@JsonProperty("name")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("name")})
     private String name;
-    @lombok.Getter(onMethod_ = {@JsonProperty("rules")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("rules")})
     private List<AutoLayerRuleDefinition> rules;
-    @lombok.Getter(onMethod_ = {@JsonProperty("uid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("uid")})
     private long uid;
+
+    @JsonProperty("active")
+    public boolean getActive() { return active; }
+    @JsonProperty("active")
+    public void setActive(boolean value) { this.active = value; }
+
+    @JsonProperty("collapsed")
+    public boolean getCollapsed() { return collapsed; }
+    @JsonProperty("collapsed")
+    public void setCollapsed(boolean value) { this.collapsed = value; }
+
+    @JsonProperty("isOptional")
+    public boolean getIsOptional() { return isOptional; }
+    @JsonProperty("isOptional")
+    public void setIsOptional(boolean value) { this.isOptional = value; }
+
+    @JsonProperty("name")
+    public String getName() { return name; }
+    @JsonProperty("name")
+    public void setName(String value) { this.name = value; }
+
+    @JsonProperty("rules")
+    public List<AutoLayerRuleDefinition> getRules() { return rules; }
+    @JsonProperty("rules")
+    public void setRules(List<AutoLayerRuleDefinition> value) { this.rules = value; }
+
+    @JsonProperty("uid")
+    public long getUid() { return uid; }
+    @JsonProperty("uid")
+    public void setUid(long value) { this.uid = value; }
 }

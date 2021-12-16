@@ -3,58 +3,166 @@ package io.github.joafalves.ldtk.model;
 import com.fasterxml.jackson.annotation.*;
 import java.util.List;
 
-@lombok.Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LayerDefinition {
-    @lombok.Getter(onMethod_ = {@JsonProperty("__type")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__type")})
     private String type;
-    @lombok.Getter(onMethod_ = {@JsonProperty("autoRuleGroups")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("autoRuleGroups")})
     private List<AutoLayerRuleGroup> autoRuleGroups;
-    @lombok.Getter(onMethod_ = {@JsonProperty("autoSourceLayerDefUid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("autoSourceLayerDefUid")})
     private Long autoSourceLayerDefUid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("autoTilesetDefUid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("autoTilesetDefUid")})
     private Long autoTilesetDefUid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("displayOpacity")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("displayOpacity")})
     private double displayOpacity;
-    @lombok.Getter(onMethod_ = {@JsonProperty("excludedTags")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("excludedTags")})
     private List<String> excludedTags;
-    @lombok.Getter(onMethod_ = {@JsonProperty("gridSize")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("gridSize")})
     private long gridSize;
-    @lombok.Getter(onMethod_ = {@JsonProperty("identifier")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("identifier")})
     private String identifier;
-    @lombok.Getter(onMethod_ = {@JsonProperty("intGridValues")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("intGridValues")})
     private List<IntGridValueDefinition> intGridValues;
-    @lombok.Getter(onMethod_ = {@JsonProperty("pxOffsetX")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("pxOffsetX")})
     private long pxOffsetX;
-    @lombok.Getter(onMethod_ = {@JsonProperty("pxOffsetY")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("pxOffsetY")})
     private long pxOffsetY;
-    @lombok.Getter(onMethod_ = {@JsonProperty("requiredTags")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("requiredTags")})
     private List<String> requiredTags;
-    @lombok.Getter(onMethod_ = {@JsonProperty("tilePivotX")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("tilePivotX")})
     private double tilePivotX;
-    @lombok.Getter(onMethod_ = {@JsonProperty("tilePivotY")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("tilePivotY")})
     private double tilePivotY;
-    @lombok.Getter(onMethod_ = {@JsonProperty("tilesetDefUid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("tilesetDefUid")})
     private Long tilesetDefUid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("type")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("type")})
     private Type layerDefinitionType;
-    @lombok.Getter(onMethod_ = {@JsonProperty("uid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("uid")})
     private long uid;
+
+    /**
+     * Type of the layer (*IntGrid, Entities, Tiles or AutoLayer*)
+     */
+    @JsonProperty("__type")
+    public String getType() { return type; }
+    @JsonProperty("__type")
+    public void setType(String value) { this.type = value; }
+
+    /**
+     * Contains all the auto-layer rule definitions.
+     */
+    @JsonProperty("autoRuleGroups")
+    public List<AutoLayerRuleGroup> getAutoRuleGroups() { return autoRuleGroups; }
+    @JsonProperty("autoRuleGroups")
+    public void setAutoRuleGroups(List<AutoLayerRuleGroup> value) { this.autoRuleGroups = value; }
+
+    @JsonProperty("autoSourceLayerDefUid")
+    public Long getAutoSourceLayerDefUid() { return autoSourceLayerDefUid; }
+    @JsonProperty("autoSourceLayerDefUid")
+    public void setAutoSourceLayerDefUid(Long value) { this.autoSourceLayerDefUid = value; }
+
+    /**
+     * Reference to the Tileset UID being used by this auto-layer rules. WARNING: some layer
+     * *instances* might use a different tileset. So most of the time, you should probably use
+     * the `__tilesetDefUid` value from layer instances.
+     */
+    @JsonProperty("autoTilesetDefUid")
+    public Long getAutoTilesetDefUid() { return autoTilesetDefUid; }
+    @JsonProperty("autoTilesetDefUid")
+    public void setAutoTilesetDefUid(Long value) { this.autoTilesetDefUid = value; }
+
+    /**
+     * Opacity of the layer (0 to 1.0)
+     */
+    @JsonProperty("displayOpacity")
+    public double getDisplayOpacity() { return displayOpacity; }
+    @JsonProperty("displayOpacity")
+    public void setDisplayOpacity(double value) { this.displayOpacity = value; }
+
+    /**
+     * An array of tags to forbid some Entities in this layer
+     */
+    @JsonProperty("excludedTags")
+    public List<String> getExcludedTags() { return excludedTags; }
+    @JsonProperty("excludedTags")
+    public void setExcludedTags(List<String> value) { this.excludedTags = value; }
+
+    /**
+     * Width and height of the grid in pixels
+     */
+    @JsonProperty("gridSize")
+    public long getGridSize() { return gridSize; }
+    @JsonProperty("gridSize")
+    public void setGridSize(long value) { this.gridSize = value; }
+
+    /**
+     * Unique String identifier
+     */
+    @JsonProperty("identifier")
+    public String getIdentifier() { return identifier; }
+    @JsonProperty("identifier")
+    public void setIdentifier(String value) { this.identifier = value; }
+
+    /**
+     * An array that defines extra optional info for each IntGrid value. The array is sorted
+     * using value (ascending).
+     */
+    @JsonProperty("intGridValues")
+    public List<IntGridValueDefinition> getIntGridValues() { return intGridValues; }
+    @JsonProperty("intGridValues")
+    public void setIntGridValues(List<IntGridValueDefinition> value) { this.intGridValues = value; }
+
+    /**
+     * X offset of the layer, in pixels (IMPORTANT: this should be added to the `LayerInstance`
+     * optional offset)
+     */
+    @JsonProperty("pxOffsetX")
+    public long getPxOffsetX() { return pxOffsetX; }
+    @JsonProperty("pxOffsetX")
+    public void setPxOffsetX(long value) { this.pxOffsetX = value; }
+
+    /**
+     * Y offset of the layer, in pixels (IMPORTANT: this should be added to the `LayerInstance`
+     * optional offset)
+     */
+    @JsonProperty("pxOffsetY")
+    public long getPxOffsetY() { return pxOffsetY; }
+    @JsonProperty("pxOffsetY")
+    public void setPxOffsetY(long value) { this.pxOffsetY = value; }
+
+    /**
+     * An array of tags to filter Entities that can be added to this layer
+     */
+    @JsonProperty("requiredTags")
+    public List<String> getRequiredTags() { return requiredTags; }
+    @JsonProperty("requiredTags")
+    public void setRequiredTags(List<String> value) { this.requiredTags = value; }
+
+    /**
+     * If the tiles are smaller or larger than the layer grid, the pivot value will be used to
+     * position the tile relatively its grid cell.
+     */
+    @JsonProperty("tilePivotX")
+    public double getTilePivotX() { return tilePivotX; }
+    @JsonProperty("tilePivotX")
+    public void setTilePivotX(double value) { this.tilePivotX = value; }
+
+    /**
+     * If the tiles are smaller or larger than the layer grid, the pivot value will be used to
+     * position the tile relatively its grid cell.
+     */
+    @JsonProperty("tilePivotY")
+    public double getTilePivotY() { return tilePivotY; }
+    @JsonProperty("tilePivotY")
+    public void setTilePivotY(double value) { this.tilePivotY = value; }
+
+    /**
+     * Reference to the Tileset UID being used by this Tile layer. WARNING: some layer
+     * *instances* might use a different tileset. So most of the time, you should probably use
+     * the `__tilesetDefUid` value from layer instances.
+     */
+    @JsonProperty("tilesetDefUid")
+    public Long getTilesetDefUid() { return tilesetDefUid; }
+    @JsonProperty("tilesetDefUid")
+    public void setTilesetDefUid(Long value) { this.tilesetDefUid = value; }
+
+    /**
+     * Type of the layer as Haxe Enum Possible values: `IntGrid`, `Entities`, `Tiles`,
+     * `AutoLayer`
+     */
+    @JsonProperty("type")
+    public Type getLayerDefinitionType() { return layerDefinitionType; }
+    @JsonProperty("type")
+    public void setLayerDefinitionType(Type value) { this.layerDefinitionType = value; }
+
+    /**
+     * Unique Int identifier
+     */
+    @JsonProperty("uid")
+    public long getUid() { return uid; }
+    @JsonProperty("uid")
+    public void setUid(long value) { this.uid = value; }
 }

@@ -6,55 +6,143 @@ import java.util.Map;
 
 /**
  * The `Tileset` definition is the most important part among project definitions. It
- * contains some extra information about each integrated tileset. If you only had to parse
+ * contains some extra informations about each integrated tileset. If you only had to parse
  * one definition section, that would be the one.
  */
-@lombok.Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TilesetDefinition {
-    @lombok.Getter(onMethod_ = {@JsonProperty("__cHei")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__cHei")})
     private long cHei;
-    @lombok.Getter(onMethod_ = {@JsonProperty("__cWid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("__cWid")})
     private long cWid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("cachedPixelData")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("cachedPixelData")})
     private Map<String, Object> cachedPixelData;
-    @lombok.Getter(onMethod_ = {@JsonProperty("customData")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("customData")})
     private List<Map<String, Object>> customData;
-    @lombok.Getter(onMethod_ = {@JsonProperty("enumTags")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("enumTags")})
     private List<Map<String, Object>> enumTags;
-    @lombok.Getter(onMethod_ = {@JsonProperty("identifier")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("identifier")})
     private String identifier;
-    @lombok.Getter(onMethod_ = {@JsonProperty("padding")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("padding")})
     private long padding;
-    @lombok.Getter(onMethod_ = {@JsonProperty("pxHei")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("pxHei")})
     private long pxHei;
-    @lombok.Getter(onMethod_ = {@JsonProperty("pxWid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("pxWid")})
     private long pxWid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("relPath")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("relPath")})
     private String relPath;
-    @lombok.Getter(onMethod_ = {@JsonProperty("savedSelections")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("savedSelections")})
     private List<Map<String, Object>> savedSelections;
-    @lombok.Getter(onMethod_ = {@JsonProperty("spacing")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("spacing")})
     private long spacing;
-    @lombok.Getter(onMethod_ = {@JsonProperty("tagsSourceEnumUid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("tagsSourceEnumUid")})
     private Long tagsSourceEnumUid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("tileGridSize")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("tileGridSize")})
     private long tileGridSize;
-    @lombok.Getter(onMethod_ = {@JsonProperty("uid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("uid")})
     private long uid;
+
+    /**
+     * Grid-based height
+     */
+    @JsonProperty("__cHei")
+    public long getCHei() { return cHei; }
+    @JsonProperty("__cHei")
+    public void setCHei(long value) { this.cHei = value; }
+
+    /**
+     * Grid-based width
+     */
+    @JsonProperty("__cWid")
+    public long getCWid() { return cWid; }
+    @JsonProperty("__cWid")
+    public void setCWid(long value) { this.cWid = value; }
+
+    /**
+     * The following data is used internally for various optimizations. It's always synced with
+     * source image changes.
+     */
+    @JsonProperty("cachedPixelData")
+    public Map<String, Object> getCachedPixelData() { return cachedPixelData; }
+    @JsonProperty("cachedPixelData")
+    public void setCachedPixelData(Map<String, Object> value) { this.cachedPixelData = value; }
+
+    /**
+     * An array of custom tile metadata
+     */
+    @JsonProperty("customData")
+    public List<Map<String, Object>> getCustomData() { return customData; }
+    @JsonProperty("customData")
+    public void setCustomData(List<Map<String, Object>> value) { this.customData = value; }
+
+    /**
+     * Tileset tags using Enum values specified by `tagsSourceEnumId`. This array contains 1
+     * element per Enum value, which contains an array of all Tile IDs that are tagged with it.
+     */
+    @JsonProperty("enumTags")
+    public List<Map<String, Object>> getEnumTags() { return enumTags; }
+    @JsonProperty("enumTags")
+    public void setEnumTags(List<Map<String, Object>> value) { this.enumTags = value; }
+
+    /**
+     * Unique String identifier
+     */
+    @JsonProperty("identifier")
+    public String getIdentifier() { return identifier; }
+    @JsonProperty("identifier")
+    public void setIdentifier(String value) { this.identifier = value; }
+
+    /**
+     * Distance in pixels from image borders
+     */
+    @JsonProperty("padding")
+    public long getPadding() { return padding; }
+    @JsonProperty("padding")
+    public void setPadding(long value) { this.padding = value; }
+
+    /**
+     * Image height in pixels
+     */
+    @JsonProperty("pxHei")
+    public long getPxHei() { return pxHei; }
+    @JsonProperty("pxHei")
+    public void setPxHei(long value) { this.pxHei = value; }
+
+    /**
+     * Image width in pixels
+     */
+    @JsonProperty("pxWid")
+    public long getPxWid() { return pxWid; }
+    @JsonProperty("pxWid")
+    public void setPxWid(long value) { this.pxWid = value; }
+
+    /**
+     * Path to the source file, relative to the current project JSON file
+     */
+    @JsonProperty("relPath")
+    public String getRelPath() { return relPath; }
+    @JsonProperty("relPath")
+    public void setRelPath(String value) { this.relPath = value; }
+
+    /**
+     * Array of group of tiles selections, only meant to be used in the editor
+     */
+    @JsonProperty("savedSelections")
+    public List<Map<String, Object>> getSavedSelections() { return savedSelections; }
+    @JsonProperty("savedSelections")
+    public void setSavedSelections(List<Map<String, Object>> value) { this.savedSelections = value; }
+
+    /**
+     * Space in pixels between all tiles
+     */
+    @JsonProperty("spacing")
+    public long getSpacing() { return spacing; }
+    @JsonProperty("spacing")
+    public void setSpacing(long value) { this.spacing = value; }
+
+    /**
+     * Optional Enum definition UID used for this tileset meta-data
+     */
+    @JsonProperty("tagsSourceEnumUid")
+    public Long getTagsSourceEnumUid() { return tagsSourceEnumUid; }
+    @JsonProperty("tagsSourceEnumUid")
+    public void setTagsSourceEnumUid(Long value) { this.tagsSourceEnumUid = value; }
+
+    @JsonProperty("tileGridSize")
+    public long getTileGridSize() { return tileGridSize; }
+    @JsonProperty("tileGridSize")
+    public void setTileGridSize(long value) { this.tileGridSize = value; }
+
+    /**
+     * Unique Intidentifier
+     */
+    @JsonProperty("uid")
+    public long getUid() { return uid; }
+    @JsonProperty("uid")
+    public void setUid(long value) { this.uid = value; }
 }

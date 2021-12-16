@@ -6,13 +6,25 @@ import java.util.List;
 /**
  * Tile data in an Entity instance
  */
-@lombok.Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EntityInstanceTile {
-    @lombok.Getter(onMethod_ = {@JsonProperty("srcRect")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("srcRect")})
     private List<Long> srcRect;
-    @lombok.Getter(onMethod_ = {@JsonProperty("tilesetUid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("tilesetUid")})
     private long tilesetUid;
+
+    /**
+     * An array of 4 Int values that refers to the tile in the tileset image: `[ x, y, width,
+     * height ]`
+     */
+    @JsonProperty("srcRect")
+    public List<Long> getSrcRect() { return srcRect; }
+    @JsonProperty("srcRect")
+    public void setSrcRect(List<Long> value) { this.srcRect = value; }
+
+    /**
+     * Tileset ID
+     */
+    @JsonProperty("tilesetUid")
+    public long getTilesetUid() { return tilesetUid; }
+    @JsonProperty("tilesetUid")
+    public void setTilesetUid(long value) { this.tilesetUid = value; }
 }

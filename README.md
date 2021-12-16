@@ -1,4 +1,4 @@
-# Java LDTK API utility library
+# Java LDTK API data library
 
 ### What is this repository for? ###
 

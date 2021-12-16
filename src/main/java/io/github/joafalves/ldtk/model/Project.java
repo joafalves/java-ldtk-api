@@ -5,84 +5,236 @@ import java.util.List;
 
 /**
  * This file is a JSON schema of files created by LDtk level editor (https://ldtk.io).
- * <p>
- * This is the root of any Project JSON file. It contains:  - the project settings, - an array of levels, - a group of
- * definitions (that can probably be safely ignored for most users).
+ *
+ * This is the root of any Project JSON file. It contains:  - the project settings, - an
+ * array of levels, - a group of definitions (that can probably be safely ignored for most
+ * users).
  */
-@lombok.Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Project {
-
-    @lombok.Getter(onMethod_ = {@JsonProperty("backupLimit")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("backupLimit")})
     private long backupLimit;
-    @lombok.Getter(onMethod_ = {@JsonProperty("backupOnSave")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("backupOnSave")})
     private boolean backupOnSave;
-    @lombok.Getter(onMethod_ = {@JsonProperty("bgColor")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("bgColor")})
     private String bgColor;
-    @lombok.Getter(onMethod_ = {@JsonProperty("defaultGridSize")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("defaultGridSize")})
     private long defaultGridSize;
-    @lombok.Getter(onMethod_ = {@JsonProperty("defaultLevelBgColor")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("defaultLevelBgColor")})
     private String defaultLevelBgColor;
-    @lombok.Getter(onMethod_ = {@JsonProperty("defaultLevelHeight")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("defaultLevelHeight")})
     private long defaultLevelHeight;
-    @lombok.Getter(onMethod_ = {@JsonProperty("defaultLevelWidth")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("defaultLevelWidth")})
     private long defaultLevelWidth;
-    @lombok.Getter(onMethod_ = {@JsonProperty("defaultPivotX")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("defaultPivotX")})
     private double defaultPivotX;
-    @lombok.Getter(onMethod_ = {@JsonProperty("defaultPivotY")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("defaultPivotY")})
     private double defaultPivotY;
-    @lombok.Getter(onMethod_ = {@JsonProperty("defs")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("defs")})
     private Definitions defs;
-    @lombok.Getter(onMethod_ = {@JsonProperty("exportPng")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("exportPng")})
     private Boolean exportPNG;
-    @lombok.Getter(onMethod_ = {@JsonProperty("exportTiled")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("exportTiled")})
     private boolean exportTiled;
-    @lombok.Getter(onMethod_ = {@JsonProperty("externalLevels")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("externalLevels")})
     private boolean externalLevels;
-    @lombok.Getter(onMethod_ = {@JsonProperty("flags")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("flags")})
     private List<Flag> flags;
-    @lombok.Getter(onMethod_ = {@JsonProperty("imageExportMode")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("imageExportMode")})
     private ImageExportMode imageExportMode;
-    @lombok.Getter(onMethod_ = {@JsonProperty("jsonVersion")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("jsonVersion")})
     private String jsonVersion;
-    @lombok.Getter(onMethod_ = {@JsonProperty("levelNamePattern")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("levelNamePattern")})
     private String levelNamePattern;
-    @lombok.Getter(onMethod_ = {@JsonProperty("levels")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("levels")})
     private List<Level> levels;
-    @lombok.Getter(onMethod_ = {@JsonProperty("minifyJson")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("minifyJson")})
     private boolean minifyJSON;
-    @lombok.Getter(onMethod_ = {@JsonProperty("nextUid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("nextUid")})
     private long nextUid;
-    @lombok.Getter(onMethod_ = {@JsonProperty("pngFilePattern")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("pngFilePattern")})
     private String pngFilePattern;
-    @lombok.Getter(onMethod_ = {@JsonProperty("worldGridHeight")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("worldGridHeight")})
     private long worldGridHeight;
-    @lombok.Getter(onMethod_ = {@JsonProperty("worldGridWidth")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("worldGridWidth")})
     private long worldGridWidth;
-    @lombok.Getter(onMethod_ = {@JsonProperty("worldLayout")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("worldLayout")})
     private WorldLayout worldLayout;
+
+    /**
+     * Number of backup files to keep, if the `backupOnSave` is TRUE
+     */
+    @JsonProperty("backupLimit")
+    public long getBackupLimit() { return backupLimit; }
+    @JsonProperty("backupLimit")
+    public void setBackupLimit(long value) { this.backupLimit = value; }
+
+    /**
+     * If TRUE, an extra copy of the project will be created in a sub folder, when saving.
+     */
+    @JsonProperty("backupOnSave")
+    public boolean getBackupOnSave() { return backupOnSave; }
+    @JsonProperty("backupOnSave")
+    public void setBackupOnSave(boolean value) { this.backupOnSave = value; }
+
+    /**
+     * Project background color
+     */
+    @JsonProperty("bgColor")
+    public String getBgColor() { return bgColor; }
+    @JsonProperty("bgColor")
+    public void setBgColor(String value) { this.bgColor = value; }
+
+    /**
+     * Default grid size for new layers
+     */
+    @JsonProperty("defaultGridSize")
+    public long getDefaultGridSize() { return defaultGridSize; }
+    @JsonProperty("defaultGridSize")
+    public void setDefaultGridSize(long value) { this.defaultGridSize = value; }
+
+    /**
+     * Default background color of levels
+     */
+    @JsonProperty("defaultLevelBgColor")
+    public String getDefaultLevelBgColor() { return defaultLevelBgColor; }
+    @JsonProperty("defaultLevelBgColor")
+    public void setDefaultLevelBgColor(String value) { this.defaultLevelBgColor = value; }
+
+    /**
+     * Default new level height
+     */
+    @JsonProperty("defaultLevelHeight")
+    public long getDefaultLevelHeight() { return defaultLevelHeight; }
+    @JsonProperty("defaultLevelHeight")
+    public void setDefaultLevelHeight(long value) { this.defaultLevelHeight = value; }
+
+    /**
+     * Default new level width
+     */
+    @JsonProperty("defaultLevelWidth")
+    public long getDefaultLevelWidth() { return defaultLevelWidth; }
+    @JsonProperty("defaultLevelWidth")
+    public void setDefaultLevelWidth(long value) { this.defaultLevelWidth = value; }
+
+    /**
+     * Default X pivot (0 to 1) for new entities
+     */
+    @JsonProperty("defaultPivotX")
+    public double getDefaultPivotX() { return defaultPivotX; }
+    @JsonProperty("defaultPivotX")
+    public void setDefaultPivotX(double value) { this.defaultPivotX = value; }
+
+    /**
+     * Default Y pivot (0 to 1) for new entities
+     */
+    @JsonProperty("defaultPivotY")
+    public double getDefaultPivotY() { return defaultPivotY; }
+    @JsonProperty("defaultPivotY")
+    public void setDefaultPivotY(double value) { this.defaultPivotY = value; }
+
+    /**
+     * A structure containing all the definitions of this project
+     */
+    @JsonProperty("defs")
+    public Definitions getDefs() { return defs; }
+    @JsonProperty("defs")
+    public void setDefs(Definitions value) { this.defs = value; }
+
+    /**
+     * **WARNING**: this deprecated value is no longer exported since version 0.9.3  Replaced
+     * by: `imageExportMode`
+     */
+    @JsonProperty("exportPng")
+    public Boolean getExportPNG() { return exportPNG; }
+    @JsonProperty("exportPng")
+    public void setExportPNG(Boolean value) { this.exportPNG = value; }
+
+    /**
+     * If TRUE, a Tiled compatible file will also be generated along with the LDtk JSON file
+     * (default is FALSE)
+     */
+    @JsonProperty("exportTiled")
+    public boolean getExportTiled() { return exportTiled; }
+    @JsonProperty("exportTiled")
+    public void setExportTiled(boolean value) { this.exportTiled = value; }
+
+    /**
+     * If TRUE, one file will be saved for the project (incl. all its definitions) and one file
+     * in a sub-folder for each level.
+     */
+    @JsonProperty("externalLevels")
+    public boolean getExternalLevels() { return externalLevels; }
+    @JsonProperty("externalLevels")
+    public void setExternalLevels(boolean value) { this.externalLevels = value; }
+
+    /**
+     * An array containing various advanced flags (ie. options or other states). Possible
+     * values: `DiscardPreCsvIntGrid`, `IgnoreBackupSuggest`
+     */
+    @JsonProperty("flags")
+    public List<Flag> getFlags() { return flags; }
+    @JsonProperty("flags")
+    public void setFlags(List<Flag> value) { this.flags = value; }
+
+    /**
+     * "Image export" option when saving project. Possible values: `None`, `OneImagePerLayer`,
+     * `OneImagePerLevel`
+     */
+    @JsonProperty("imageExportMode")
+    public ImageExportMode getImageExportMode() { return imageExportMode; }
+    @JsonProperty("imageExportMode")
+    public void setImageExportMode(ImageExportMode value) { this.imageExportMode = value; }
+
+    /**
+     * File format version
+     */
+    @JsonProperty("jsonVersion")
+    public String getJSONVersion() { return jsonVersion; }
+    @JsonProperty("jsonVersion")
+    public void setJSONVersion(String value) { this.jsonVersion = value; }
+
+    /**
+     * The default naming convention for level identifiers.
+     */
+    @JsonProperty("levelNamePattern")
+    public String getLevelNamePattern() { return levelNamePattern; }
+    @JsonProperty("levelNamePattern")
+    public void setLevelNamePattern(String value) { this.levelNamePattern = value; }
+
+    /**
+     * All levels. The order of this array is only relevant in `LinearHorizontal` and
+     * `linearVertical` world layouts (see `worldLayout` value). Otherwise, you should refer to
+     * the `worldX`,`worldY` coordinates of each Level.
+     */
+    @JsonProperty("levels")
+    public List<Level> getLevels() { return levels; }
+    @JsonProperty("levels")
+    public void setLevels(List<Level> value) { this.levels = value; }
+
+    /**
+     * If TRUE, the Json is partially minified (no indentation, nor line breaks, default is
+     * FALSE)
+     */
+    @JsonProperty("minifyJson")
+    public boolean getMinifyJSON() { return minifyJSON; }
+    @JsonProperty("minifyJson")
+    public void setMinifyJSON(boolean value) { this.minifyJSON = value; }
+
+    /**
+     * Next Unique integer ID available
+     */
+    @JsonProperty("nextUid")
+    public long getNextUid() { return nextUid; }
+    @JsonProperty("nextUid")
+    public void setNextUid(long value) { this.nextUid = value; }
+
+    /**
+     * File naming pattern for exported PNGs
+     */
+    @JsonProperty("pngFilePattern")
+    public String getPNGFilePattern() { return pngFilePattern; }
+    @JsonProperty("pngFilePattern")
+    public void setPNGFilePattern(String value) { this.pngFilePattern = value; }
+
+    /**
+     * Height of the world grid in pixels.
+     */
+    @JsonProperty("worldGridHeight")
+    public long getWorldGridHeight() { return worldGridHeight; }
+    @JsonProperty("worldGridHeight")
+    public void setWorldGridHeight(long value) { this.worldGridHeight = value; }
+
+    /**
+     * Width of the world grid in pixels.
+     */
+    @JsonProperty("worldGridWidth")
+    public long getWorldGridWidth() { return worldGridWidth; }
+    @JsonProperty("worldGridWidth")
+    public void setWorldGridWidth(long value) { this.worldGridWidth = value; }
+
+    /**
+     * An enum that describes how levels are organized in this project (ie. linearly or in a 2D
+     * space). Possible values: `Free`, `GridVania`, `LinearHorizontal`, `LinearVertical`
+     */
+    @JsonProperty("worldLayout")
+    public WorldLayout getWorldLayout() { return worldLayout; }
+    @JsonProperty("worldLayout")
+    public void setWorldLayout(WorldLayout value) { this.worldLayout = value; }
 }

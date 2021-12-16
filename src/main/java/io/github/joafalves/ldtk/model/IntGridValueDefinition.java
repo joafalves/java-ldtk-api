@@ -5,16 +5,30 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * IntGrid value definition
  */
-@lombok.Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class IntGridValueDefinition {
-    @lombok.Getter(onMethod_ = {@JsonProperty("color")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("color")})
     private String color;
-    @lombok.Getter(onMethod_ = {@JsonProperty("identifier")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("identifier")})
     private String identifier;
-    @lombok.Getter(onMethod_ = {@JsonProperty("value")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("value")})
     private long value;
+
+    @JsonProperty("color")
+    public String getColor() { return color; }
+    @JsonProperty("color")
+    public void setColor(String value) { this.color = value; }
+
+    /**
+     * Unique String identifier
+     */
+    @JsonProperty("identifier")
+    public String getIdentifier() { return identifier; }
+    @JsonProperty("identifier")
+    public void setIdentifier(String value) { this.identifier = value; }
+
+    /**
+     * The IntGrid value itself
+     */
+    @JsonProperty("value")
+    public long getValue() { return value; }
+    @JsonProperty("value")
+    public void setValue(long value) { this.value = value; }
 }

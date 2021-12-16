@@ -13,25 +13,61 @@ import java.util.List;
  * `__identifier` or `__type`).  The 2 only definition types you might need here are
  * **Tilesets** and **Enums**.
  */
-@lombok.Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Definitions {
-    @lombok.Getter(onMethod_ = {@JsonProperty("entities")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("entities")})
     private List<EntityDefinition> entities;
-    @lombok.Getter(onMethod_ = {@JsonProperty("enums")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("enums")})
     private List<EnumDefinition> enums;
-    @lombok.Getter(onMethod_ = {@JsonProperty("externalEnums")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("externalEnums")})
     private List<EnumDefinition> externalEnums;
-    @lombok.Getter(onMethod_ = {@JsonProperty("layers")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("layers")})
     private List<LayerDefinition> layers;
-    @lombok.Getter(onMethod_ = {@JsonProperty("levelFields")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("levelFields")})
     private List<FieldDefinition> levelFields;
-    @lombok.Getter(onMethod_ = {@JsonProperty("tilesets")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("tilesets")})
     private List<TilesetDefinition> tilesets;
+
+    /**
+     * All entities definitions, including their custom fields
+     */
+    @JsonProperty("entities")
+    public List<EntityDefinition> getEntities() { return entities; }
+    @JsonProperty("entities")
+    public void setEntities(List<EntityDefinition> value) { this.entities = value; }
+
+    /**
+     * All internal enums
+     */
+    @JsonProperty("enums")
+    public List<EnumDefinition> getEnums() { return enums; }
+    @JsonProperty("enums")
+    public void setEnums(List<EnumDefinition> value) { this.enums = value; }
+
+    /**
+     * Note: external enums are exactly the same as `enums`, except they have a `relPath` to
+     * point to an external source file.
+     */
+    @JsonProperty("externalEnums")
+    public List<EnumDefinition> getExternalEnums() { return externalEnums; }
+    @JsonProperty("externalEnums")
+    public void setExternalEnums(List<EnumDefinition> value) { this.externalEnums = value; }
+
+    /**
+     * All layer definitions
+     */
+    @JsonProperty("layers")
+    public List<LayerDefinition> getLayers() { return layers; }
+    @JsonProperty("layers")
+    public void setLayers(List<LayerDefinition> value) { this.layers = value; }
+
+    /**
+     * All custom fields available to all levels.
+     */
+    @JsonProperty("levelFields")
+    public List<FieldDefinition> getLevelFields() { return levelFields; }
+    @JsonProperty("levelFields")
+    public void setLevelFields(List<FieldDefinition> value) { this.levelFields = value; }
+
+    /**
+     * All tilesets
+     */
+    @JsonProperty("tilesets")
+    public List<TilesetDefinition> getTilesets() { return tilesets; }
+    @JsonProperty("tilesets")
+    public void setTilesets(List<TilesetDefinition> value) { this.tilesets = value; }
 }

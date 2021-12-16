@@ -5,13 +5,22 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * Nearby level info
  */
-@lombok.Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeighbourLevel {
-    @lombok.Getter(onMethod_ = {@JsonProperty("dir")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("dir")})
     private String dir;
-    @lombok.Getter(onMethod_ = {@JsonProperty("levelUid")})
-    @lombok.Setter(onMethod_ = {@JsonProperty("levelUid")})
     private long levelUid;
+
+    /**
+     * A single lowercase character tipping on the level location (`n`orth, `s`outh, `w`est,
+     * `e`ast).
+     */
+    @JsonProperty("dir")
+    public String getDir() { return dir; }
+    @JsonProperty("dir")
+    public void setDir(String value) { this.dir = value; }
+
+    @JsonProperty("levelUid")
+    public long getLevelUid() { return levelUid; }
+    @JsonProperty("levelUid")
+    public void setLevelUid(long value) { this.levelUid = value; }
 }

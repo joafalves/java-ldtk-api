@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.*;
  * If TRUE, the maxCount is a "per world" limit, if FALSE, it's a "per level". Possible
  * values: `PerLayer`, `PerLevel`, `PerWorld`
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public enum LimitScope {
     PER_LAYER, PER_LEVEL, PER_WORLD;
 
