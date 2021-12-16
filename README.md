@@ -5,8 +5,8 @@
 
 ### What is this repository for? ###
 
-This repository contains a full data model based on the latest API schema of [LDTK](https://ldtk.io/) (schema-extracted)
-. In addition, also provides a set of converters to load the data model from a valid JSON source file.
+This repository contains a full data model based on the latest API schema of [LDTK](https://ldtk.io/) (schema-extracted
+using [QuickType](https://quicktype.io/)). In addition, also provides a set of converters to load the data model from a valid JSON source file.
 
 ### Examples ###
 
@@ -27,7 +27,7 @@ Notice that the version matches the JSON version of the data model (minimum vers
 
 `https://s01.oss.sonatype.org/content/repositories/releases/`
 
-**Gradle Import:** 
+**Gradle Import:**
 
 ```
 repositories {
