@@ -1,15 +1,15 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FieldInstance {
     private String identifier;
+    private TilesetRectangle tile;
     private String type;
     private Object value;
     private long defUid;
-    private List<Object> realEditorValues;
+    private Object[] realEditorValues;
 
     /**
      * Field definition identifier
@@ -20,7 +20,18 @@ public class FieldInstance {
     public void setIdentifier(String value) { this.identifier = value; }
 
     /**
-     * Type of the field, such as `Int`, `Float`, `Enum(my_enum_name)`, `Bool`, etc.
+     * Optional TilesetRect used to display this field (this can be the field own Tile, or some
+     * other Tile guessed from the value, like an Enum).
+     */
+    @JsonProperty("__tile")
+    public TilesetRectangle getTile() { return tile; }
+    @JsonProperty("__tile")
+    public void setTile(TilesetRectangle value) { this.tile = value; }
+
+    /**
+     * Type of the field, such as `Int`, `Float`, `String`, `Enum(my_enum_name)`, `Bool`,
+     * etc. NOTE: if you enable the advanced option **Use Multilines type**, you will have
+     * "*Multilines*" instead of "*String*" when relevant.
      */
     @JsonProperty("__type")
     public String getType() { return type; }
@@ -28,8 +39,15 @@ public class FieldInstance {
     public void setType(String value) { this.type = value; }
 
     /**
-     * Actual value of the field instance. The value type may vary, depending on `__type`
-     * (Integer, Boolean, String etc.).  It can also be an `Array` of those same types.
+     * Actual value of the field instance. The value type varies, depending on `__type`:
+     * - For **classic types** (ie. Integer, Float, Boolean, String, Text and FilePath), you
+     * just get the actual value with the expected type.  - For **Color**, the value is an
+     * hexadecimal string using "#rrggbb" format.  - For **Enum**, the value is a String
+     * representing the selected enum value.  - For **Point**, the value is a
+     * [GridPoint](#ldtk-GridPoint) object.  - For **Tile**, the value is a
+     * [TilesetRect](#ldtk-TilesetRect) object.  - For **EntityRef**, the value is an
+     * [EntityReferenceInfos](#ldtk-EntityReferenceInfos) object.If the field is an
+     * array, then this `__value` will also be a JSON array.
      */
     @JsonProperty("__value")
     public Object getValue() { return value; }
@@ -48,7 +66,7 @@ public class FieldInstance {
      * Editor internal raw values
      */
     @JsonProperty("realEditorValues")
-    public List<Object> getRealEditorValues() { return realEditorValues; }
+    public Object[] getRealEditorValues() { return realEditorValues; }
     @JsonProperty("realEditorValues")
-    public void setRealEditorValues(List<Object> value) { this.realEditorValues = value; }
+    public void setRealEditorValues(Object[] value) { this.realEditorValues = value; }
 }

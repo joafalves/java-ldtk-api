@@ -17,7 +17,7 @@ public class IntGridValueDefinition {
     public void setColor(String value) { this.color = value; }
 
     /**
-     * Unique String identifier
+     * User defined unique identifier
      */
     @JsonProperty("identifier")
     public String getIdentifier() { return identifier; }

@@ -1,7 +1,7 @@
 # Java LDTK API data library
 
 ![](https://img.shields.io/badge/java-%3E%3D%208-green)
-![](https://img.shields.io/badge/latest%20version-0.9.3-blue)
+![](https://img.shields.io/badge/api%20latest%20version-1.0.0-blue)
 
 ### What is this repository for? ###
 

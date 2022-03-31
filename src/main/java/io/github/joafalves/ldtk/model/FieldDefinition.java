@@ -1,7 +1,6 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.List;
 
 /**
  * This section is mostly only intended for the LDtk editor app itself. You can safely
@@ -10,28 +9,33 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FieldDefinition {
     private String type;
-    private List<String> acceptFileTypes;
+    private String[] acceptFileTypes;
+    private AllowedRefs allowedRefs;
+    private String[] allowedRefTags;
+    private boolean allowOutOfLevelRef;
     private Long arrayMaxLength;
     private Long arrayMinLength;
+    private boolean autoChainRef;
     private boolean canBeNull;
     private Object defaultOverride;
     private boolean editorAlwaysShow;
     private boolean editorCutLongValues;
     private EditorDisplayMode editorDisplayMode;
     private EditorDisplayPos editorDisplayPos;
+    private String editorTextPrefix;
+    private String editorTextSuffix;
     private String identifier;
     private boolean isArray;
     private Double max;
     private Double min;
     private String regex;
+    private boolean symmetricalRef;
     private TextLanguageMode textLanguageMode;
-    private Object fieldDefinitionType;
+    private Long tilesetUid;
+    private String fieldDefinitionType;
     private long uid;
+    private boolean useForSmartColor;
 
-    /**
-     * Human readable value type (eg. `Int`, `Float`, `Point`, etc.). If the field is an array,
-     * this field will look like `Array` (eg. `Array`, `Array` etc.)
-     */
     @JsonProperty("__type")
     public String getType() { return type; }
     @JsonProperty("__type")
@@ -42,9 +46,27 @@ public class FieldDefinition {
      * `.ext`
      */
     @JsonProperty("acceptFileTypes")
-    public List<String> getAcceptFileTypes() { return acceptFileTypes; }
+    public String[] getAcceptFileTypes() { return acceptFileTypes; }
     @JsonProperty("acceptFileTypes")
-    public void setAcceptFileTypes(List<String> value) { this.acceptFileTypes = value; }
+    public void setAcceptFileTypes(String[] value) { this.acceptFileTypes = value; }
+
+    /**
+     * Possible values: `Any`, `OnlySame`, `OnlyTags`
+     */
+    @JsonProperty("allowedRefs")
+    public AllowedRefs getAllowedRefs() { return allowedRefs; }
+    @JsonProperty("allowedRefs")
+    public void setAllowedRefs(AllowedRefs value) { this.allowedRefs = value; }
+
+    @JsonProperty("allowedRefTags")
+    public String[] getAllowedRefTags() { return allowedRefTags; }
+    @JsonProperty("allowedRefTags")
+    public void setAllowedRefTags(String[] value) { this.allowedRefTags = value; }
+
+    @JsonProperty("allowOutOfLevelRef")
+    public boolean getAllowOutOfLevelRef() { return allowOutOfLevelRef; }
+    @JsonProperty("allowOutOfLevelRef")
+    public void setAllowOutOfLevelRef(boolean value) { this.allowOutOfLevelRef = value; }
 
     /**
      * Array max length
@@ -61,6 +83,11 @@ public class FieldDefinition {
     public Long getArrayMinLength() { return arrayMinLength; }
     @JsonProperty("arrayMinLength")
     public void setArrayMinLength(Long value) { this.arrayMinLength = value; }
+
+    @JsonProperty("autoChainRef")
+    public boolean getAutoChainRef() { return autoChainRef; }
+    @JsonProperty("autoChainRef")
+    public void setAutoChainRef(boolean value) { this.autoChainRef = value; }
 
     /**
      * TRUE if the value can be null. For arrays, TRUE means it can contain null values
@@ -91,7 +118,9 @@ public class FieldDefinition {
 
     /**
      * Possible values: `Hidden`, `ValueOnly`, `NameAndValue`, `EntityTile`, `Points`,
-     * `PointStar`, `PointPath`, `PointPathLoop`, `RadiusPx`, `RadiusGrid`
+     * `PointStar`, `PointPath`, `PointPathLoop`, `RadiusPx`, `RadiusGrid`,
+     * `ArrayCountWithLabel`, `ArrayCountNoLabel`, `RefLinkBetweenPivots`,
+     * `RefLinkBetweenCenters`
      */
     @JsonProperty("editorDisplayMode")
     public EditorDisplayMode getEditorDisplayMode() { return editorDisplayMode; }
@@ -106,8 +135,18 @@ public class FieldDefinition {
     @JsonProperty("editorDisplayPos")
     public void setEditorDisplayPos(EditorDisplayPos value) { this.editorDisplayPos = value; }
 
+    @JsonProperty("editorTextPrefix")
+    public String getEditorTextPrefix() { return editorTextPrefix; }
+    @JsonProperty("editorTextPrefix")
+    public void setEditorTextPrefix(String value) { this.editorTextPrefix = value; }
+
+    @JsonProperty("editorTextSuffix")
+    public String getEditorTextSuffix() { return editorTextSuffix; }
+    @JsonProperty("editorTextSuffix")
+    public void setEditorTextSuffix(String value) { this.editorTextSuffix = value; }
+
     /**
-     * Unique String identifier
+     * User defined unique identifier
      */
     @JsonProperty("identifier")
     public String getIdentifier() { return identifier; }
@@ -147,9 +186,14 @@ public class FieldDefinition {
     @JsonProperty("regex")
     public void setRegex(String value) { this.regex = value; }
 
+    @JsonProperty("symmetricalRef")
+    public boolean getSymmetricalRef() { return symmetricalRef; }
+    @JsonProperty("symmetricalRef")
+    public void setSymmetricalRef(boolean value) { this.symmetricalRef = value; }
+
     /**
      * Possible values: &lt;`null`&gt;, `LangPython`, `LangRuby`, `LangJS`, `LangLua`, `LangC`,
-     * `LangHaxe`, `LangMarkdown`, `LangJson`, `LangXml`
+     * `LangHaxe`, `LangMarkdown`, `LangJson`, `LangXml`, `LangLog`
      */
     @JsonProperty("textLanguageMode")
     public TextLanguageMode getTextLanguageMode() { return textLanguageMode; }
@@ -157,12 +201,21 @@ public class FieldDefinition {
     public void setTextLanguageMode(TextLanguageMode value) { this.textLanguageMode = value; }
 
     /**
-     * Internal type enum
+     * UID of the tileset used for a Tile
+     */
+    @JsonProperty("tilesetUid")
+    public Long getTilesetUid() { return tilesetUid; }
+    @JsonProperty("tilesetUid")
+    public void setTilesetUid(Long value) { this.tilesetUid = value; }
+
+    /**
+     * Internal enum representing the possible field types. Possible values: F_Int, F_Float,
+     * F_String, F_Text, F_Bool, F_Color, F_Enum(...), F_Point, F_Path, F_EntityRef, F_Tile
      */
     @JsonProperty("type")
-    public Object getFieldDefinitionType() { return fieldDefinitionType; }
+    public String getFieldDefinitionType() { return fieldDefinitionType; }
     @JsonProperty("type")
-    public void setFieldDefinitionType(Object value) { this.fieldDefinitionType = value; }
+    public void setFieldDefinitionType(String value) { this.fieldDefinitionType = value; }
 
     /**
      * Unique Int identifier
@@ -171,4 +224,14 @@ public class FieldDefinition {
     public long getUid() { return uid; }
     @JsonProperty("uid")
     public void setUid(long value) { this.uid = value; }
+
+    /**
+     * If TRUE, the color associated with this field will override the Entity or Level default
+     * color in the editor UI. For Enum fields, this would be the color associated to their
+     * values.
+     */
+    @JsonProperty("useForSmartColor")
+    public boolean getUseForSmartColor() { return useForSmartColor; }
+    @JsonProperty("useForSmartColor")
+    public void setUseForSmartColor(boolean value) { this.useForSmartColor = value; }
 }

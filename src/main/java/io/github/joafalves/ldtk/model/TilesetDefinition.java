@@ -1,7 +1,6 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,15 +13,17 @@ public class TilesetDefinition {
     private long cHei;
     private long cWid;
     private Map<String, Object> cachedPixelData;
-    private List<Map<String, Object>> customData;
-    private List<Map<String, Object>> enumTags;
+    private TileCustomMetadata[] customData;
+    private EmbedAtlas embedAtlas;
+    private EnumTagValue[] enumTags;
     private String identifier;
     private long padding;
     private long pxHei;
     private long pxWid;
     private String relPath;
-    private List<Map<String, Object>> savedSelections;
+    private Map<String, Object>[] savedSelections;
     private long spacing;
+    private String[] tags;
     private Long tagsSourceEnumUid;
     private long tileGridSize;
     private long uid;
@@ -56,21 +57,30 @@ public class TilesetDefinition {
      * An array of custom tile metadata
      */
     @JsonProperty("customData")
-    public List<Map<String, Object>> getCustomData() { return customData; }
+    public TileCustomMetadata[] getCustomData() { return customData; }
     @JsonProperty("customData")
-    public void setCustomData(List<Map<String, Object>> value) { this.customData = value; }
+    public void setCustomData(TileCustomMetadata[] value) { this.customData = value; }
+
+    /**
+     * If this value is set, then it means that this atlas uses an internal LDtk atlas image
+     * instead of a loaded one. Possible values: &lt;`null`&gt;, `LdtkIcons`
+     */
+    @JsonProperty("embedAtlas")
+    public EmbedAtlas getEmbedAtlas() { return embedAtlas; }
+    @JsonProperty("embedAtlas")
+    public void setEmbedAtlas(EmbedAtlas value) { this.embedAtlas = value; }
 
     /**
      * Tileset tags using Enum values specified by `tagsSourceEnumId`. This array contains 1
      * element per Enum value, which contains an array of all Tile IDs that are tagged with it.
      */
     @JsonProperty("enumTags")
-    public List<Map<String, Object>> getEnumTags() { return enumTags; }
+    public EnumTagValue[] getEnumTags() { return enumTags; }
     @JsonProperty("enumTags")
-    public void setEnumTags(List<Map<String, Object>> value) { this.enumTags = value; }
+    public void setEnumTags(EnumTagValue[] value) { this.enumTags = value; }
 
     /**
-     * Unique String identifier
+     * User defined unique identifier
      */
     @JsonProperty("identifier")
     public String getIdentifier() { return identifier; }
@@ -113,9 +123,9 @@ public class TilesetDefinition {
      * Array of group of tiles selections, only meant to be used in the editor
      */
     @JsonProperty("savedSelections")
-    public List<Map<String, Object>> getSavedSelections() { return savedSelections; }
+    public Map<String, Object>[] getSavedSelections() { return savedSelections; }
     @JsonProperty("savedSelections")
-    public void setSavedSelections(List<Map<String, Object>> value) { this.savedSelections = value; }
+    public void setSavedSelections(Map<String, Object>[] value) { this.savedSelections = value; }
 
     /**
      * Space in pixels between all tiles
@@ -124,6 +134,14 @@ public class TilesetDefinition {
     public long getSpacing() { return spacing; }
     @JsonProperty("spacing")
     public void setSpacing(long value) { this.spacing = value; }
+
+    /**
+     * An array of user-defined tags to organize the Tilesets
+     */
+    @JsonProperty("tags")
+    public String[] getTags() { return tags; }
+    @JsonProperty("tags")
+    public void setTags(String[] value) { this.tags = value; }
 
     /**
      * Optional Enum definition UID used for this tileset meta-data

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import io.github.joafalves.ldtk.model.Project;
+import io.github.joafalves.ldtk.model.Coordinate;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.time.OffsetTime;
@@ -20,7 +20,6 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
 public class LdtkConverter {
-    // Date-time helpers
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
             .appendOptional(DateTimeFormatter.ISO_DATE_TIME)
@@ -50,11 +49,11 @@ public class LdtkConverter {
     }
     // Serialize/deserialize helpers
 
-    public static Project fromJsonString(String json) throws IOException {
+    public static Coordinate fromJsonString(String json) throws IOException {
         return getObjectReader().readValue(json);
     }
 
-    public static String toJsonString(Project obj) throws JsonProcessingException {
+    public static String toJsonString(Coordinate obj) throws JsonProcessingException {
         return getObjectWriter().writeValueAsString(obj);
     }
 
@@ -75,8 +74,8 @@ public class LdtkConverter {
             }
         });
         mapper.registerModule(module);
-        reader = mapper.readerFor(Project.class);
-        writer = mapper.writerFor(Project.class);
+        reader = mapper.readerFor(Coordinate.class);
+        writer = mapper.writerFor(Coordinate.class);
     }
 
     private static ObjectReader getObjectReader() {

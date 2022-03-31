@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class NeighbourLevel {
     private String dir;
-    private long levelUid;
+    private String levelIid;
+    private Long levelUid;
 
     /**
      * A single lowercase character tipping on the level location (`n`orth, `s`outh, `w`est,
@@ -19,8 +20,20 @@ public class NeighbourLevel {
     @JsonProperty("dir")
     public void setDir(String value) { this.dir = value; }
 
+    /**
+     * Neighbour Instance Identifier
+     */
+    @JsonProperty("levelIid")
+    public String getLevelIid() { return levelIid; }
+    @JsonProperty("levelIid")
+    public void setLevelIid(String value) { this.levelIid = value; }
+
+    /**
+     * **WARNING**: this deprecated value will be *removed* completely on version 1.2.0+
+     * Replaced by: `levelIid`
+     */
     @JsonProperty("levelUid")
-    public long getLevelUid() { return levelUid; }
+    public Long getLevelUid() { return levelUid; }
     @JsonProperty("levelUid")
-    public void setLevelUid(long value) { this.levelUid = value; }
+    public void setLevelUid(Long value) { this.levelUid = value; }
 }

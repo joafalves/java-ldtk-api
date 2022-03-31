@@ -1,6 +1,6 @@
 package io.github.joafalves.ldtk;
 
-import io.github.joafalves.ldtk.model.Project;
+import io.github.joafalves.ldtk.model.Coordinate;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +13,7 @@ public class LdtkConverterTest {
 
     @Test
     public void loadTest() throws IOException {
-        Project project = LdtkConverter.fromJsonString(loadResourceFile("./data.json"));
+        Coordinate project = LdtkConverter.fromJsonString(loadResourceFile("./data.json"));
         Assertions.assertNotNull(project);
     }
 

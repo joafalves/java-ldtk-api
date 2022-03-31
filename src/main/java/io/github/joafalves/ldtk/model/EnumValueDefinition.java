@@ -1,11 +1,10 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EnumValueDefinition {
-    private List<Long> tileSrcRect;
+    private long[] tileSrcRect;
     private long color;
     private String id;
     private Long tileID;
@@ -15,9 +14,9 @@ public class EnumValueDefinition {
      * height ]`
      */
     @JsonProperty("__tileSrcRect")
-    public List<Long> getTileSrcRect() { return tileSrcRect; }
+    public long[] getTileSrcRect() { return tileSrcRect; }
     @JsonProperty("__tileSrcRect")
-    public void setTileSrcRect(List<Long> value) { this.tileSrcRect = value; }
+    public void setTileSrcRect(long[] value) { this.tileSrcRect = value; }
 
     /**
      * Optional color

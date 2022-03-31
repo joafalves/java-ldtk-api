@@ -1,15 +1,14 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AutoLayerRuleGroup {
     private boolean active;
-    private boolean collapsed;
+    private Boolean collapsed;
     private boolean isOptional;
     private String name;
-    private List<AutoLayerRuleDefinition> rules;
+    private AutoLayerRuleDefinition[] rules;
     private long uid;
 
     @JsonProperty("active")
@@ -17,10 +16,13 @@ public class AutoLayerRuleGroup {
     @JsonProperty("active")
     public void setActive(boolean value) { this.active = value; }
 
+    /**
+     * *This field was removed in 1.0.0 and should no longer be used.*
+     */
     @JsonProperty("collapsed")
-    public boolean getCollapsed() { return collapsed; }
+    public Boolean getCollapsed() { return collapsed; }
     @JsonProperty("collapsed")
-    public void setCollapsed(boolean value) { this.collapsed = value; }
+    public void setCollapsed(Boolean value) { this.collapsed = value; }
 
     @JsonProperty("isOptional")
     public boolean getIsOptional() { return isOptional; }
@@ -33,9 +35,9 @@ public class AutoLayerRuleGroup {
     public void setName(String value) { this.name = value; }
 
     @JsonProperty("rules")
-    public List<AutoLayerRuleDefinition> getRules() { return rules; }
+    public AutoLayerRuleDefinition[] getRules() { return rules; }
     @JsonProperty("rules")
-    public void setRules(List<AutoLayerRuleDefinition> value) { this.rules = value; }
+    public void setRules(AutoLayerRuleDefinition[] value) { this.rules = value; }
 
     @JsonProperty("uid")
     public long getUid() { return uid; }

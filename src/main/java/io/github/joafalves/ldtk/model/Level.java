@@ -1,7 +1,6 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.List;
 
 /**
  * This section contains all the level data. It can be found in 2 distinct forms, depending
@@ -17,20 +16,23 @@ import java.util.List;
 public class Level {
     private String bgColor;
     private LevelBackgroundPosition bgPos;
-    private List<NeighbourLevel> neighbours;
+    private NeighbourLevel[] neighbours;
+    private String smartColor;
     private String levelBgColor;
     private double bgPivotX;
     private double bgPivotY;
     private BgPos levelBgPos;
     private String bgRelPath;
     private String externalRelPath;
-    private List<FieldInstance> fieldInstances;
+    private FieldInstance[] fieldInstances;
     private String identifier;
-    private List<LayerInstance> layerInstances;
+    private String iid;
+    private LayerInstance[] layerInstances;
     private long pxHei;
     private long pxWid;
     private long uid;
     private boolean useAutoIdentifier;
+    private long worldDepth;
     private long worldX;
     private long worldY;
 
@@ -52,14 +54,23 @@ public class Level {
     public void setBgPos(LevelBackgroundPosition value) { this.bgPos = value; }
 
     /**
-     * An array listing all other levels touching this one on the world map. In "linear" world
-     * layouts, this array is populated with previous/next levels in array, and `dir` depends on
-     * the linear horizontal/vertical layout.
+     * An array listing all other levels touching this one on the world map. Only relevant
+     * for world layouts where level spatial positioning is manual (ie. GridVania, Free). For
+     * Horizontal and Vertical layouts, this array is always empty.
      */
     @JsonProperty("__neighbours")
-    public List<NeighbourLevel> getNeighbours() { return neighbours; }
+    public NeighbourLevel[] getNeighbours() { return neighbours; }
     @JsonProperty("__neighbours")
-    public void setNeighbours(List<NeighbourLevel> value) { this.neighbours = value; }
+    public void setNeighbours(NeighbourLevel[] value) { this.neighbours = value; }
+
+    /**
+     * The "guessed" color for this level in the editor, decided using either the background
+     * color or an existing custom field.
+     */
+    @JsonProperty("__smartColor")
+    public String getSmartColor() { return smartColor; }
+    @JsonProperty("__smartColor")
+    public void setSmartColor(String value) { this.smartColor = value; }
 
     /**
      * Background color of the level. If `null`, the project `defaultLevelBgColor` should be
@@ -117,12 +128,12 @@ public class Level {
      * An array containing this level custom field values.
      */
     @JsonProperty("fieldInstances")
-    public List<FieldInstance> getFieldInstances() { return fieldInstances; }
+    public FieldInstance[] getFieldInstances() { return fieldInstances; }
     @JsonProperty("fieldInstances")
-    public void setFieldInstances(List<FieldInstance> value) { this.fieldInstances = value; }
+    public void setFieldInstances(FieldInstance[] value) { this.fieldInstances = value; }
 
     /**
-     * Unique String identifier
+     * User defined unique identifier
      */
     @JsonProperty("identifier")
     public String getIdentifier() { return identifier; }
@@ -130,14 +141,22 @@ public class Level {
     public void setIdentifier(String value) { this.identifier = value; }
 
     /**
+     * Unique instance identifier
+     */
+    @JsonProperty("iid")
+    public String getIid() { return iid; }
+    @JsonProperty("iid")
+    public void setIid(String value) { this.iid = value; }
+
+    /**
      * An array containing all Layer instances. **IMPORTANT**: if the project option "*Save
      * levels separately*" is enabled, this field will be `null`. This array is **sorted
      * in display order**: the 1st layer is the top-most and the last is behind.
      */
     @JsonProperty("layerInstances")
-    public List<LayerInstance> getLayerInstances() { return layerInstances; }
+    public LayerInstance[] getLayerInstances() { return layerInstances; }
     @JsonProperty("layerInstances")
-    public void setLayerInstances(List<LayerInstance> value) { this.layerInstances = value; }
+    public void setLayerInstances(LayerInstance[] value) { this.layerInstances = value; }
 
     /**
      * Height of the level in pixels
@@ -174,7 +193,19 @@ public class Level {
     public void setUseAutoIdentifier(boolean value) { this.useAutoIdentifier = value; }
 
     /**
-     * World X coordinate in pixels
+     * Index that represents the "depth" of the level in the world. Default is 0, greater means
+     * "above", lower means "below". This value is mostly used for display only and is
+     * intended to make stacking of levels easier to manage.
+     */
+    @JsonProperty("worldDepth")
+    public long getWorldDepth() { return worldDepth; }
+    @JsonProperty("worldDepth")
+    public void setWorldDepth(long value) { this.worldDepth = value; }
+
+    /**
+     * World X coordinate in pixels. Only relevant for world layouts where level spatial
+     * positioning is manual (ie. GridVania, Free). For Horizontal and Vertical layouts, the
+     * value is always -1 here.
      */
     @JsonProperty("worldX")
     public long getWorldX() { return worldX; }
@@ -182,7 +213,9 @@ public class Level {
     public void setWorldX(long value) { this.worldX = value; }
 
     /**
-     * World Y coordinate in pixels
+     * World Y coordinate in pixels. Only relevant for world layouts where level spatial
+     * positioning is manual (ie. GridVania, Free). For Horizontal and Vertical layouts, the
+     * value is always -1 here.
      */
     @JsonProperty("worldY")
     public long getWorldY() { return worldY; }

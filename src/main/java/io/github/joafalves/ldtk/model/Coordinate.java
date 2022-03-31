@@ -1,7 +1,6 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.List;
 
 /**
  * This file is a JSON schema of files created by LDtk level editor (https://ldtk.io).
@@ -11,31 +10,58 @@ import java.util.List;
  * users).
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Project {
+public class Coordinate {
+    private ForcedRefs forcedRefs;
+    private double appBuildID;
     private long backupLimit;
     private boolean backupOnSave;
     private String bgColor;
     private long defaultGridSize;
     private String defaultLevelBgColor;
-    private long defaultLevelHeight;
-    private long defaultLevelWidth;
+    private Long defaultLevelHeight;
+    private Long defaultLevelWidth;
     private double defaultPivotX;
     private double defaultPivotY;
     private Definitions defs;
     private Boolean exportPNG;
     private boolean exportTiled;
     private boolean externalLevels;
-    private List<Flag> flags;
+    private Flag[] flags;
+    private IdentifierStyle identifierStyle;
     private ImageExportMode imageExportMode;
     private String jsonVersion;
     private String levelNamePattern;
-    private List<Level> levels;
+    private Level[] levels;
     private boolean minifyJSON;
     private long nextUid;
     private String pngFilePattern;
-    private long worldGridHeight;
-    private long worldGridWidth;
+    private String tutorialDesc;
+    private Long worldGridHeight;
+    private Long worldGridWidth;
     private WorldLayout worldLayout;
+    private World[] worlds;
+
+    /**
+     * This object is not actually used by LDtk. It ONLY exists to force explicit references to
+     * all types, to make sure QuickType finds them and integrate all of them. Otherwise,
+     * Quicktype will drop types that are not explicitely used.
+     */
+    @JsonProperty("__FORCED_REFS")
+    public ForcedRefs getForcedRefs() { return forcedRefs; }
+    @JsonProperty("__FORCED_REFS")
+    public void setForcedRefs(ForcedRefs value) { this.forcedRefs = value; }
+
+    /**
+     * LDtk application build identifier.  This is only used to identify the LDtk version
+     * that generated this particular project file, which can be useful for specific bug fixing.
+     * Note that the build identifier is just the date of the release, so it's not unique to
+     * each user (one single global ID per LDtk public release), and as a result, completely
+     * anonymous.
+     */
+    @JsonProperty("appBuildId")
+    public double getAppBuildID() { return appBuildID; }
+    @JsonProperty("appBuildId")
+    public void setAppBuildID(double value) { this.appBuildID = value; }
 
     /**
      * Number of backup files to keep, if the `backupOnSave` is TRUE
@@ -78,20 +104,24 @@ public class Project {
     public void setDefaultLevelBgColor(String value) { this.defaultLevelBgColor = value; }
 
     /**
-     * Default new level height
+     * **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
+     * It will then be `null`. You can enable the Multi-worlds advanced project option to enable
+     * the change immediately.  Default new level height
      */
     @JsonProperty("defaultLevelHeight")
-    public long getDefaultLevelHeight() { return defaultLevelHeight; }
+    public Long getDefaultLevelHeight() { return defaultLevelHeight; }
     @JsonProperty("defaultLevelHeight")
-    public void setDefaultLevelHeight(long value) { this.defaultLevelHeight = value; }
+    public void setDefaultLevelHeight(Long value) { this.defaultLevelHeight = value; }
 
     /**
-     * Default new level width
+     * **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
+     * It will then be `null`. You can enable the Multi-worlds advanced project option to enable
+     * the change immediately.  Default new level width
      */
     @JsonProperty("defaultLevelWidth")
-    public long getDefaultLevelWidth() { return defaultLevelWidth; }
+    public Long getDefaultLevelWidth() { return defaultLevelWidth; }
     @JsonProperty("defaultLevelWidth")
-    public void setDefaultLevelWidth(long value) { this.defaultLevelWidth = value; }
+    public void setDefaultLevelWidth(Long value) { this.defaultLevelWidth = value; }
 
     /**
      * Default X pivot (0 to 1) for new entities
@@ -146,12 +176,22 @@ public class Project {
 
     /**
      * An array containing various advanced flags (ie. options or other states). Possible
-     * values: `DiscardPreCsvIntGrid`, `IgnoreBackupSuggest`
+     * values: `DiscardPreCsvIntGrid`, `ExportPreCsvIntGridFormat`, `IgnoreBackupSuggest`,
+     * `PrependIndexToLevelFileNames`, `MultiWorlds`, `UseMultilinesType`
      */
     @JsonProperty("flags")
-    public List<Flag> getFlags() { return flags; }
+    public Flag[] getFlags() { return flags; }
     @JsonProperty("flags")
-    public void setFlags(List<Flag> value) { this.flags = value; }
+    public void setFlags(Flag[] value) { this.flags = value; }
+
+    /**
+     * Naming convention for Identifiers (first-letter uppercase, full uppercase etc.) Possible
+     * values: `Capitalize`, `Uppercase`, `Lowercase`, `Free`
+     */
+    @JsonProperty("identifierStyle")
+    public IdentifierStyle getIdentifierStyle() { return identifierStyle; }
+    @JsonProperty("identifierStyle")
+    public void setIdentifierStyle(IdentifierStyle value) { this.identifierStyle = value; }
 
     /**
      * "Image export" option when saving project. Possible values: `None`, `OneImagePerLayer`,
@@ -180,13 +220,13 @@ public class Project {
 
     /**
      * All levels. The order of this array is only relevant in `LinearHorizontal` and
-     * `linearVertical` world layouts (see `worldLayout` value). Otherwise, you should refer to
-     * the `worldX`,`worldY` coordinates of each Level.
+     * `linearVertical` world layouts (see `worldLayout` value). Otherwise, you should
+     * refer to the `worldX`,`worldY` coordinates of each Level.
      */
     @JsonProperty("levels")
-    public List<Level> getLevels() { return levels; }
+    public Level[] getLevels() { return levels; }
     @JsonProperty("levels")
-    public void setLevels(List<Level> value) { this.levels = value; }
+    public void setLevels(Level[] value) { this.levels = value; }
 
     /**
      * If TRUE, the Json is partially minified (no indentation, nor line breaks, default is
@@ -214,27 +254,61 @@ public class Project {
     public void setPNGFilePattern(String value) { this.pngFilePattern = value; }
 
     /**
-     * Height of the world grid in pixels.
+     * This optional description is used by LDtk Samples to show up some informations and
+     * instructions.
      */
-    @JsonProperty("worldGridHeight")
-    public long getWorldGridHeight() { return worldGridHeight; }
-    @JsonProperty("worldGridHeight")
-    public void setWorldGridHeight(long value) { this.worldGridHeight = value; }
+    @JsonProperty("tutorialDesc")
+    public String getTutorialDesc() { return tutorialDesc; }
+    @JsonProperty("tutorialDesc")
+    public void setTutorialDesc(String value) { this.tutorialDesc = value; }
 
     /**
-     * Width of the world grid in pixels.
+     * **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
+     * It will then be `null`. You can enable the Multi-worlds advanced project option to enable
+     * the change immediately. Height of the world grid in pixels.
      */
-    @JsonProperty("worldGridWidth")
-    public long getWorldGridWidth() { return worldGridWidth; }
-    @JsonProperty("worldGridWidth")
-    public void setWorldGridWidth(long value) { this.worldGridWidth = value; }
+    @JsonProperty("worldGridHeight")
+    public Long getWorldGridHeight() { return worldGridHeight; }
+    @JsonProperty("worldGridHeight")
+    public void setWorldGridHeight(Long value) { this.worldGridHeight = value; }
 
     /**
-     * An enum that describes how levels are organized in this project (ie. linearly or in a 2D
-     * space). Possible values: `Free`, `GridVania`, `LinearHorizontal`, `LinearVertical`
+     * **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
+     * It will then be `null`. You can enable the Multi-worlds advanced project option to enable
+     * the change immediately. Width of the world grid in pixels.
+     */
+    @JsonProperty("worldGridWidth")
+    public Long getWorldGridWidth() { return worldGridWidth; }
+    @JsonProperty("worldGridWidth")
+    public void setWorldGridWidth(Long value) { this.worldGridWidth = value; }
+
+    /**
+     * **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
+     * It will then be `null`. You can enable the Multi-worlds advanced project option to enable
+     * the change immediately.An enum that describes how levels are organized in
+     * this project (ie. linearly or in a 2D space). Possible values: &lt;`null`&gt;, `Free`,
+     * `GridVania`, `LinearHorizontal`, `LinearVertical`
      */
     @JsonProperty("worldLayout")
     public WorldLayout getWorldLayout() { return worldLayout; }
     @JsonProperty("worldLayout")
     public void setWorldLayout(WorldLayout value) { this.worldLayout = value; }
+
+    /**
+     * This array is not used yet in current LDtk version (so, for now, it's always
+     * empty).In a later update, it will be possible to have multiple Worlds in a
+     * single project, each containing multiple Levels.What will change when "Multiple
+     * worlds" support will be added to LDtk:- in current version, a LDtk project
+     * file can only contain a single world with multiple levels in it. In this case, levels and
+     * world layout related settings are stored in the root of the JSON.- after the
+     * "Multiple worlds" update, there will be a `worlds` array in root, each world containing
+     * levels and layout settings. Basically, it's pretty much only about moving the `levels`
+     * array to the `worlds` array, along with world layout related values (eg. `worldGridWidth`
+     * etc).If you want to start supporting this future update easily, please refer to
+     * this documentation: https://github.com/deepnight/ldtk/issues/231
+     */
+    @JsonProperty("worlds")
+    public World[] getWorlds() { return worlds; }
+    @JsonProperty("worlds")
+    public void setWorlds(World[] value) { this.worlds = value; }
 }

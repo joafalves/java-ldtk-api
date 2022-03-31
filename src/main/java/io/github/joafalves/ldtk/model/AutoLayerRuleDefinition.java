@@ -1,7 +1,6 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.List;
 
 /**
  * This complex section isn't meant to be used by game devs at all, as these rules are
@@ -17,7 +16,7 @@ public class AutoLayerRuleDefinition {
     private boolean flipX;
     private boolean flipY;
     private Long outOfBoundsValue;
-    private List<Long> pattern;
+    private long[] pattern;
     private boolean perlinActive;
     private double perlinOctaves;
     private double perlinScale;
@@ -25,11 +24,13 @@ public class AutoLayerRuleDefinition {
     private double pivotX;
     private double pivotY;
     private long size;
-    private List<Long> tileIDS;
+    private long[] tileIDS;
     private TileMode tileMode;
     private long uid;
     private long xModulo;
+    private long xOffset;
     private long yModulo;
+    private long yOffset;
 
     /**
      * If FALSE, the rule effect isn't applied, and no tiles are generated.
@@ -92,9 +93,9 @@ public class AutoLayerRuleDefinition {
      * Rule pattern (size x size)
      */
     @JsonProperty("pattern")
-    public List<Long> getPattern() { return pattern; }
+    public long[] getPattern() { return pattern; }
     @JsonProperty("pattern")
-    public void setPattern(List<Long> value) { this.pattern = value; }
+    public void setPattern(long[] value) { this.pattern = value; }
 
     /**
      * If TRUE, enable Perlin filtering to only apply rule on specific random area
@@ -147,9 +148,9 @@ public class AutoLayerRuleDefinition {
      * Array of all the tile IDs. They are used randomly or as stamps, based on `tileMode` value.
      */
     @JsonProperty("tileIds")
-    public List<Long> getTileIDS() { return tileIDS; }
+    public long[] getTileIDS() { return tileIDS; }
     @JsonProperty("tileIds")
-    public void setTileIDS(List<Long> value) { this.tileIDS = value; }
+    public void setTileIDS(long[] value) { this.tileIDS = value; }
 
     /**
      * Defines how tileIds array is used Possible values: `Single`, `Stamp`
@@ -176,10 +177,26 @@ public class AutoLayerRuleDefinition {
     public void setXModulo(long value) { this.xModulo = value; }
 
     /**
+     * X cell start offset
+     */
+    @JsonProperty("xOffset")
+    public long getXOffset() { return xOffset; }
+    @JsonProperty("xOffset")
+    public void setXOffset(long value) { this.xOffset = value; }
+
+    /**
      * Y cell coord modulo
      */
     @JsonProperty("yModulo")
     public long getYModulo() { return yModulo; }
     @JsonProperty("yModulo")
     public void setYModulo(long value) { this.yModulo = value; }
+
+    /**
+     * Y cell start offset
+     */
+    @JsonProperty("yOffset")
+    public long getYOffset() { return yOffset; }
+    @JsonProperty("yOffset")
+    public void setYOffset(long value) { this.yOffset = value; }
 }

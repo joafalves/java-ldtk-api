@@ -3,10 +3,6 @@ package io.github.joafalves.ldtk.model;
 import java.io.IOException;
 import com.fasterxml.jackson.annotation.*;
 
-/**
- * An enum that describes how levels are organized in this project (ie. linearly or in a 2D
- * space). Possible values: `Free`, `GridVania`, `LinearHorizontal`, `LinearVertical`
- */
 public enum WorldLayout {
     FREE, GRID_VANIA, LINEAR_HORIZONTAL, LINEAR_VERTICAL;
 

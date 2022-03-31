@@ -1,12 +1,10 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.List;
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EntityDefinition {
     private String color;
-    private List<FieldDefinition> fieldDefs;
+    private FieldDefinition[] fieldDefs;
     private double fillOpacity;
     private long height;
     private boolean hollow;
@@ -16,14 +14,17 @@ public class EntityDefinition {
     private LimitScope limitScope;
     private double lineOpacity;
     private long maxCount;
+    private long[] nineSliceBorders;
     private double pivotX;
     private double pivotY;
     private RenderMode renderMode;
     private boolean resizableX;
     private boolean resizableY;
     private boolean showName;
-    private List<String> tags;
+    private String[] tags;
     private Long tileID;
+    private double tileOpacity;
+    private TilesetRectangle tileRect;
     private TileRenderMode tileRenderMode;
     private Long tilesetID;
     private long uid;
@@ -41,9 +42,9 @@ public class EntityDefinition {
      * Array of field definitions
      */
     @JsonProperty("fieldDefs")
-    public List<FieldDefinition> getFieldDefs() { return fieldDefs; }
+    public FieldDefinition[] getFieldDefs() { return fieldDefs; }
     @JsonProperty("fieldDefs")
-    public void setFieldDefs(List<FieldDefinition> value) { this.fieldDefs = value; }
+    public void setFieldDefs(FieldDefinition[] value) { this.fieldDefs = value; }
 
     @JsonProperty("fillOpacity")
     public double getFillOpacity() { return fillOpacity; }
@@ -64,7 +65,7 @@ public class EntityDefinition {
     public void setHollow(boolean value) { this.hollow = value; }
 
     /**
-     * Unique String identifier
+     * User defined unique identifier
      */
     @JsonProperty("identifier")
     public String getIdentifier() { return identifier; }
@@ -109,6 +110,16 @@ public class EntityDefinition {
     public long getMaxCount() { return maxCount; }
     @JsonProperty("maxCount")
     public void setMaxCount(long value) { this.maxCount = value; }
+
+    /**
+     * An array of 4 dimensions for the up/right/down/left borders (in this order) when using
+     * 9-slice mode for `tileRenderMode`. If the tileRenderMode is not NineSlice, then
+     * this array is empty. See: https://en.wikipedia.org/wiki/9-slice_scaling
+     */
+    @JsonProperty("nineSliceBorders")
+    public long[] getNineSliceBorders() { return nineSliceBorders; }
+    @JsonProperty("nineSliceBorders")
+    public void setNineSliceBorders(long[] value) { this.nineSliceBorders = value; }
 
     /**
      * Pivot X coordinate (from 0 to 1.0)
@@ -162,20 +173,36 @@ public class EntityDefinition {
      * An array of strings that classifies this entity
      */
     @JsonProperty("tags")
-    public List<String> getTags() { return tags; }
+    public String[] getTags() { return tags; }
     @JsonProperty("tags")
-    public void setTags(List<String> value) { this.tags = value; }
+    public void setTags(String[] value) { this.tags = value; }
 
     /**
-     * Tile ID used for optional tile display
+     * **WARNING**: this deprecated value will be *removed* completely on version 1.2.0+
+     * Replaced by: `tileRect`
      */
     @JsonProperty("tileId")
     public Long getTileID() { return tileID; }
     @JsonProperty("tileId")
     public void setTileID(Long value) { this.tileID = value; }
 
+    @JsonProperty("tileOpacity")
+    public double getTileOpacity() { return tileOpacity; }
+    @JsonProperty("tileOpacity")
+    public void setTileOpacity(double value) { this.tileOpacity = value; }
+
     /**
-     * Possible values: `Cover`, `FitInside`, `Repeat`, `Stretch`
+     * An object representing a rectangle from an existing Tileset
+     */
+    @JsonProperty("tileRect")
+    public TilesetRectangle getTileRect() { return tileRect; }
+    @JsonProperty("tileRect")
+    public void setTileRect(TilesetRectangle value) { this.tileRect = value; }
+
+    /**
+     * An enum describing how the the Entity tile is rendered inside the Entity bounds. Possible
+     * values: `Cover`, `FitInside`, `Repeat`, `Stretch`, `FullSizeCropped`,
+     * `FullSizeUncropped`, `NineSlice`
      */
     @JsonProperty("tileRenderMode")
     public TileRenderMode getTileRenderMode() { return tileRenderMode; }

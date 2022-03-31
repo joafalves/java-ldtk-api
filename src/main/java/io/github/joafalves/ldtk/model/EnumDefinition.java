@@ -1,7 +1,6 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EnumDefinition {
@@ -9,8 +8,9 @@ public class EnumDefinition {
     private String externalRelPath;
     private Long iconTilesetUid;
     private String identifier;
+    private String[] tags;
     private long uid;
-    private List<EnumValueDefinition> values;
+    private EnumValueDefinition[] values;
 
     @JsonProperty("externalFileChecksum")
     public String getExternalFileChecksum() { return externalFileChecksum; }
@@ -34,12 +34,20 @@ public class EnumDefinition {
     public void setIconTilesetUid(Long value) { this.iconTilesetUid = value; }
 
     /**
-     * Unique String identifier
+     * User defined unique identifier
      */
     @JsonProperty("identifier")
     public String getIdentifier() { return identifier; }
     @JsonProperty("identifier")
     public void setIdentifier(String value) { this.identifier = value; }
+
+    /**
+     * An array of user-defined tags to organize the Enums
+     */
+    @JsonProperty("tags")
+    public String[] getTags() { return tags; }
+    @JsonProperty("tags")
+    public void setTags(String[] value) { this.tags = value; }
 
     /**
      * Unique Int identifier
@@ -53,7 +61,7 @@ public class EnumDefinition {
      * All possible enum values, with their optional Tile infos.
      */
     @JsonProperty("values")
-    public List<EnumValueDefinition> getValues() { return values; }
+    public EnumValueDefinition[] getValues() { return values; }
     @JsonProperty("values")
-    public void setValues(List<EnumValueDefinition> value) { this.values = value; }
+    public void setValues(EnumValueDefinition[] value) { this.values = value; }
 }

@@ -1,7 +1,6 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LayerInstance {
@@ -15,14 +14,15 @@ public class LayerInstance {
     private Long tilesetDefUid;
     private String tilesetRelPath;
     private String type;
-    private List<TileInstance> autoLayerTiles;
-    private List<EntityInstance> entityInstances;
-    private List<TileInstance> gridTiles;
-    private List<IntGridValueInstance> intGrid;
-    private List<Long> intGridCSV;
+    private TileInstance[] autoLayerTiles;
+    private EntityInstance[] entityInstances;
+    private TileInstance[] gridTiles;
+    private String iid;
+    private IntGridValueInstance[] intGrid;
+    private long[] intGridCSV;
     private long layerDefUid;
     private long levelID;
-    private List<Long> optionalRules;
+    private long[] optionalRules;
     private Long overrideTilesetUid;
     private long pxOffsetX;
     private long pxOffsetY;
@@ -116,38 +116,47 @@ public class LayerInstance {
      * all tiles behind opaque ones will be discarded.
      */
     @JsonProperty("autoLayerTiles")
-    public List<TileInstance> getAutoLayerTiles() { return autoLayerTiles; }
+    public TileInstance[] getAutoLayerTiles() { return autoLayerTiles; }
     @JsonProperty("autoLayerTiles")
-    public void setAutoLayerTiles(List<TileInstance> value) { this.autoLayerTiles = value; }
+    public void setAutoLayerTiles(TileInstance[] value) { this.autoLayerTiles = value; }
 
     @JsonProperty("entityInstances")
-    public List<EntityInstance> getEntityInstances() { return entityInstances; }
+    public EntityInstance[] getEntityInstances() { return entityInstances; }
     @JsonProperty("entityInstances")
-    public void setEntityInstances(List<EntityInstance> value) { this.entityInstances = value; }
+    public void setEntityInstances(EntityInstance[] value) { this.entityInstances = value; }
 
     @JsonProperty("gridTiles")
-    public List<TileInstance> getGridTiles() { return gridTiles; }
+    public TileInstance[] getGridTiles() { return gridTiles; }
     @JsonProperty("gridTiles")
-    public void setGridTiles(List<TileInstance> value) { this.gridTiles = value; }
+    public void setGridTiles(TileInstance[] value) { this.gridTiles = value; }
 
     /**
-     * **WARNING**: this deprecated value will be *removed* completely on version 0.10.0+
-     * Replaced by: `intGridCsv`
+     * Unique layer instance identifier
      */
-    @JsonProperty("intGrid")
-    public List<IntGridValueInstance> getIntGrid() { return intGrid; }
-    @JsonProperty("intGrid")
-    public void setIntGrid(List<IntGridValueInstance> value) { this.intGrid = value; }
+    @JsonProperty("iid")
+    public String getIid() { return iid; }
+    @JsonProperty("iid")
+    public void setIid(String value) { this.iid = value; }
 
     /**
-     * A list of all values in the IntGrid layer, stored from left to right, and top to bottom
-     * (ie. first row from left to right, followed by second row, etc). `0` means "empty cell"
-     * and IntGrid values start at 1. This array size is `__cWid` x `__cHei` cells.
+     * **WARNING**: this deprecated value is no longer exported since version 1.0.0  Replaced
+     * by: `intGridCsv`
+     */
+    @JsonProperty("intGrid")
+    public IntGridValueInstance[] getIntGrid() { return intGrid; }
+    @JsonProperty("intGrid")
+    public void setIntGrid(IntGridValueInstance[] value) { this.intGrid = value; }
+
+    /**
+     * A list of all values in the IntGrid layer, stored in CSV format (Comma Separated
+     * Values). Order is from left to right, and top to bottom (ie. first row from left to
+     * right, followed by second row, etc). `0` means "empty cell" and IntGrid values
+     * start at 1. The array size is `__cWid` x `__cHei` cells.
      */
     @JsonProperty("intGridCsv")
-    public List<Long> getIntGridCSV() { return intGridCSV; }
+    public long[] getIntGridCSV() { return intGridCSV; }
     @JsonProperty("intGridCsv")
-    public void setIntGridCSV(List<Long> value) { this.intGridCSV = value; }
+    public void setIntGridCSV(long[] value) { this.intGridCSV = value; }
 
     /**
      * Reference the Layer definition UID
@@ -170,9 +179,9 @@ public class LayerInstance {
      * instance.
      */
     @JsonProperty("optionalRules")
-    public List<Long> getOptionalRules() { return optionalRules; }
+    public long[] getOptionalRules() { return optionalRules; }
     @JsonProperty("optionalRules")
-    public void setOptionalRules(List<Long> value) { this.optionalRules = value; }
+    public void setOptionalRules(long[] value) { this.optionalRules = value; }
 
     /**
      * This layer can use another tileset by overriding the tileset UID here.
