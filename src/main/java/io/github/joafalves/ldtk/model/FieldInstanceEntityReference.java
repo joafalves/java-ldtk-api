@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * This object is used in Field Instances to describe an EntityRef value.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class FieldInstanceEntityReference {
     private String entityIid;
     private String layerIid;

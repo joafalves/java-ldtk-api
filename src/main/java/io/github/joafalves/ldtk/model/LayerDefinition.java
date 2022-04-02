@@ -130,7 +130,7 @@ public class LayerDefinition {
     public void setInactiveOpacity(double value) { this.inactiveOpacity = value; }
 
     /**
-     * An array that defines extra optional info for each IntGrid value. WARNING: the
+     * An array that defines extra optional info for each IntGrid value.  WARNING: the
      * array order is not related to actual IntGrid values! As user can re-order IntGrid values
      * freely, you may value "2" before value "1" in this array.
      */
@@ -212,7 +212,7 @@ public class LayerDefinition {
     /**
      * Reference to the default Tileset UID being used by this layer definition.
      * **WARNING**: some layer *instances* might use a different tileset. So most of the time,
-     * you should probably use the `__tilesetDefUid` value found in layer instances. Note:
+     * you should probably use the `__tilesetDefUid` value found in layer instances.  Note:
      * since version 1.0.0, the old `autoTilesetDefUid` was removed and merged into this value.
      */
     @JsonProperty("tilesetDefUid")

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * Nearby level info
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class NeighbourLevel {
     private String dir;
     private String levelIid;

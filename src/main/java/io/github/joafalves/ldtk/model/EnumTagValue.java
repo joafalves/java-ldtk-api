@@ -5,18 +5,17 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * In a tileset definition, enum based tag infos
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class EnumTagValue {
-    private String enumValueID;
-    private long[] tileIDS;
+    private String enumValueId;
+    private long[] tileIds;
 
     @JsonProperty("enumValueId")
-    public String getEnumValueID() { return enumValueID; }
+    public String getEnumValueId() { return enumValueId; }
     @JsonProperty("enumValueId")
-    public void setEnumValueID(String value) { this.enumValueID = value; }
+    public void setEnumValueId(String value) { this.enumValueId = value; }
 
     @JsonProperty("tileIds")
-    public long[] getTileIDS() { return tileIDS; }
+    public long[] getTileIds() { return tileIds; }
     @JsonProperty("tileIds")
-    public void setTileIDS(long[] value) { this.tileIDS = value; }
+    public void setTileIds(long[] value) { this.tileIds = value; }
 }

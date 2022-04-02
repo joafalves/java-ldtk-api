@@ -2,7 +2,6 @@ package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class LayerInstance {
     private long cHei;
     private long cWid;
@@ -19,9 +18,9 @@ public class LayerInstance {
     private TileInstance[] gridTiles;
     private String iid;
     private IntGridValueInstance[] intGrid;
-    private long[] intGridCSV;
+    private long[] intGridCsv;
     private long layerDefUid;
-    private long levelID;
+    private long levelId;
     private long[] optionalRules;
     private Long overrideTilesetUid;
     private long pxOffsetX;
@@ -149,14 +148,14 @@ public class LayerInstance {
 
     /**
      * A list of all values in the IntGrid layer, stored in CSV format (Comma Separated
-     * Values). Order is from left to right, and top to bottom (ie. first row from left to
-     * right, followed by second row, etc). `0` means "empty cell" and IntGrid values
-     * start at 1. The array size is `__cWid` x `__cHei` cells.
+     * Values).  Order is from left to right, and top to bottom (ie. first row from left to
+     * right, followed by second row, etc).  `0` means "empty cell" and IntGrid values
+     * start at 1.  The array size is `__cWid` x `__cHei` cells.
      */
     @JsonProperty("intGridCsv")
-    public long[] getIntGridCSV() { return intGridCSV; }
+    public long[] getIntGridCsv() { return intGridCsv; }
     @JsonProperty("intGridCsv")
-    public void setIntGridCSV(long[] value) { this.intGridCSV = value; }
+    public void setIntGridCsv(long[] value) { this.intGridCsv = value; }
 
     /**
      * Reference the Layer definition UID
@@ -170,9 +169,9 @@ public class LayerInstance {
      * Reference to the UID of the level containing this layer instance
      */
     @JsonProperty("levelId")
-    public long getLevelID() { return levelID; }
+    public long getLevelId() { return levelId; }
     @JsonProperty("levelId")
-    public void setLevelID(long value) { this.levelID = value; }
+    public void setLevelId(long value) { this.levelId = value; }
 
     /**
      * An Array containing the UIDs of optional rules that were enabled in this specific layer

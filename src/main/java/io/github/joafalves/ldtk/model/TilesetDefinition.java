@@ -8,7 +8,6 @@ import java.util.Map;
  * contains some extra informations about each integrated tileset. If you only had to parse
  * one definition section, that would be the one.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class TilesetDefinition {
     private long cHei;
     private long cWid;

@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Coordinate {
     private ForcedRefs forcedRefs;
-    private double appBuildID;
+    private double appBuildId;
     private long backupLimit;
     private boolean backupOnSave;
     private String bgColor;
@@ -23,7 +23,7 @@ public class Coordinate {
     private double defaultPivotX;
     private double defaultPivotY;
     private Definitions defs;
-    private Boolean exportPNG;
+    private Boolean exportPng;
     private boolean exportTiled;
     private boolean externalLevels;
     private Flag[] flags;
@@ -32,9 +32,10 @@ public class Coordinate {
     private String jsonVersion;
     private String levelNamePattern;
     private Level[] levels;
-    private boolean minifyJSON;
+    private boolean minifyJson;
     private long nextUid;
     private String pngFilePattern;
+    private boolean simplifiedExport;
     private String tutorialDesc;
     private Long worldGridHeight;
     private Long worldGridWidth;
@@ -52,16 +53,16 @@ public class Coordinate {
     public void setForcedRefs(ForcedRefs value) { this.forcedRefs = value; }
 
     /**
-     * LDtk application build identifier.  This is only used to identify the LDtk version
+     * LDtk application build identifier. This is only used to identify the LDtk version
      * that generated this particular project file, which can be useful for specific bug fixing.
      * Note that the build identifier is just the date of the release, so it's not unique to
      * each user (one single global ID per LDtk public release), and as a result, completely
      * anonymous.
      */
     @JsonProperty("appBuildId")
-    public double getAppBuildID() { return appBuildID; }
+    public double getAppBuildId() { return appBuildId; }
     @JsonProperty("appBuildId")
-    public void setAppBuildID(double value) { this.appBuildID = value; }
+    public void setAppBuildId(double value) { this.appBuildId = value; }
 
     /**
      * Number of backup files to keep, if the `backupOnSave` is TRUE
@@ -152,9 +153,9 @@ public class Coordinate {
      * by: `imageExportMode`
      */
     @JsonProperty("exportPng")
-    public Boolean getExportPNG() { return exportPNG; }
+    public Boolean getExportPng() { return exportPng; }
     @JsonProperty("exportPng")
-    public void setExportPNG(Boolean value) { this.exportPNG = value; }
+    public void setExportPng(Boolean value) { this.exportPng = value; }
 
     /**
      * If TRUE, a Tiled compatible file will also be generated along with the LDtk JSON file
@@ -195,7 +196,7 @@ public class Coordinate {
 
     /**
      * "Image export" option when saving project. Possible values: `None`, `OneImagePerLayer`,
-     * `OneImagePerLevel`
+     * `OneImagePerLevel`, `LayersAndLevels`
      */
     @JsonProperty("imageExportMode")
     public ImageExportMode getImageExportMode() { return imageExportMode; }
@@ -206,9 +207,9 @@ public class Coordinate {
      * File format version
      */
     @JsonProperty("jsonVersion")
-    public String getJSONVersion() { return jsonVersion; }
+    public String getjsonVersion() { return jsonVersion; }
     @JsonProperty("jsonVersion")
-    public void setJSONVersion(String value) { this.jsonVersion = value; }
+    public void setjsonVersion(String value) { this.jsonVersion = value; }
 
     /**
      * The default naming convention for level identifiers.
@@ -220,7 +221,7 @@ public class Coordinate {
 
     /**
      * All levels. The order of this array is only relevant in `LinearHorizontal` and
-     * `linearVertical` world layouts (see `worldLayout` value). Otherwise, you should
+     * `linearVertical` world layouts (see `worldLayout` value).  Otherwise, you should
      * refer to the `worldX`,`worldY` coordinates of each Level.
      */
     @JsonProperty("levels")
@@ -233,9 +234,9 @@ public class Coordinate {
      * FALSE)
      */
     @JsonProperty("minifyJson")
-    public boolean getMinifyJSON() { return minifyJSON; }
+    public boolean getMinifyJson() { return minifyJson; }
     @JsonProperty("minifyJson")
-    public void setMinifyJSON(boolean value) { this.minifyJSON = value; }
+    public void setMinifyJson(boolean value) { this.minifyJson = value; }
 
     /**
      * Next Unique integer ID available
@@ -249,12 +250,21 @@ public class Coordinate {
      * File naming pattern for exported PNGs
      */
     @JsonProperty("pngFilePattern")
-    public String getPNGFilePattern() { return pngFilePattern; }
+    public String getpngFilePattern() { return pngFilePattern; }
     @JsonProperty("pngFilePattern")
-    public void setPNGFilePattern(String value) { this.pngFilePattern = value; }
+    public void setpngFilePattern(String value) { this.pngFilePattern = value; }
 
     /**
-     * This optional description is used by LDtk Samples to show up some informations and
+     * If TRUE, a very simplified will be generated on saving, for quicker and easier engine
+     * integration.
+     */
+    @JsonProperty("simplifiedExport")
+    public boolean getSimplifiedExport() { return simplifiedExport; }
+    @JsonProperty("simplifiedExport")
+    public void setSimplifiedExport(boolean value) { this.simplifiedExport = value; }
+
+    /**
+     * This optional description is used by LDtk Samples to show up some information and
      * instructions.
      */
     @JsonProperty("tutorialDesc")
@@ -265,7 +275,7 @@ public class Coordinate {
     /**
      * **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
      * It will then be `null`. You can enable the Multi-worlds advanced project option to enable
-     * the change immediately. Height of the world grid in pixels.
+     * the change immediately.  Height of the world grid in pixels.
      */
     @JsonProperty("worldGridHeight")
     public Long getWorldGridHeight() { return worldGridHeight; }
@@ -275,7 +285,7 @@ public class Coordinate {
     /**
      * **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
      * It will then be `null`. You can enable the Multi-worlds advanced project option to enable
-     * the change immediately. Width of the world grid in pixels.
+     * the change immediately.  Width of the world grid in pixels.
      */
     @JsonProperty("worldGridWidth")
     public Long getWorldGridWidth() { return worldGridWidth; }
@@ -285,7 +295,7 @@ public class Coordinate {
     /**
      * **WARNING**: this field will move to the `worlds` array after the "multi-worlds" update.
      * It will then be `null`. You can enable the Multi-worlds advanced project option to enable
-     * the change immediately.An enum that describes how levels are organized in
+     * the change immediately.  An enum that describes how levels are organized in
      * this project (ie. linearly or in a 2D space). Possible values: &lt;`null`&gt;, `Free`,
      * `GridVania`, `LinearHorizontal`, `LinearVertical`
      */
@@ -298,9 +308,9 @@ public class Coordinate {
      * This array is not used yet in current LDtk version (so, for now, it's always
      * empty).In a later update, it will be possible to have multiple Worlds in a
      * single project, each containing multiple Levels.What will change when "Multiple
-     * worlds" support will be added to LDtk:- in current version, a LDtk project
+     * worlds" support will be added to LDtk: - in current version, a LDtk project
      * file can only contain a single world with multiple levels in it. In this case, levels and
-     * world layout related settings are stored in the root of the JSON.- after the
+     * world layout related settings are stored in the root of the JSON. - after the
      * "Multiple worlds" update, there will be a `worlds` array in root, each world containing
      * levels and layout settings. Basically, it's pretty much only about moving the `levels`
      * array to the `worlds` array, along with world layout related values (eg. `worldGridWidth`

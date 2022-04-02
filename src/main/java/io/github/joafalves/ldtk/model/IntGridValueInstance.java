@@ -5,18 +5,17 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * IntGrid value instance
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class IntGridValueInstance {
-    private long coordID;
+    private long coordId;
     private long v;
 
     /**
      * Coordinate ID in the layer grid
      */
     @JsonProperty("coordId")
-    public long getCoordID() { return coordID; }
+    public long getCoordId() { return coordId; }
     @JsonProperty("coordId")
-    public void setCoordID(long value) { this.coordID = value; }
+    public void setCoordId(long value) { this.coordId = value; }
 
     /**
      * IntGrid value

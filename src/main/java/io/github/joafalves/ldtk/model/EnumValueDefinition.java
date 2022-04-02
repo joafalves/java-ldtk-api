@@ -2,12 +2,11 @@ package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class EnumValueDefinition {
     private long[] tileSrcRect;
     private long color;
     private String id;
-    private Long tileID;
+    private Long tileId;
 
     /**
      * An array of 4 Int values that refers to the tile in the tileset image: `[ x, y, width,
@@ -30,15 +29,15 @@ public class EnumValueDefinition {
      * Enum value
      */
     @JsonProperty("id")
-    public String getID() { return id; }
+    public String getid() { return id; }
     @JsonProperty("id")
-    public void setID(String value) { this.id = value; }
+    public void setid(String value) { this.id = value; }
 
     /**
      * The optional ID of the tile
      */
     @JsonProperty("tileId")
-    public Long getTileID() { return tileID; }
+    public Long getTileId() { return tileId; }
     @JsonProperty("tileId")
-    public void setTileID(Long value) { this.tileID = value; }
+    public void setTileId(Long value) { this.tileId = value; }
 }

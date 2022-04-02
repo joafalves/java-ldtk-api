@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.*;
  * here as a preview of a planned feature.  A World contains multiple levels, and it has its
  * own layout settings.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class World {
     private long defaultLevelHeight;
     private long defaultLevelWidth;

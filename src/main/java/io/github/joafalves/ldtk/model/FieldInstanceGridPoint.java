@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * This object is just a grid-based coordinate used in Field values.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class FieldInstanceGridPoint {
     private long cx;
     private long cy;

@@ -2,7 +2,6 @@ package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class FieldInstance {
     private String identifier;
     private TilesetRectangle tile;
@@ -30,7 +29,7 @@ public class FieldInstance {
 
     /**
      * Type of the field, such as `Int`, `Float`, `String`, `Enum(my_enum_name)`, `Bool`,
-     * etc. NOTE: if you enable the advanced option **Use Multilines type**, you will have
+     * etc.  NOTE: if you enable the advanced option **Use Multilines type**, you will have
      * "*Multilines*" instead of "*String*" when relevant.
      */
     @JsonProperty("__type")
@@ -41,12 +40,12 @@ public class FieldInstance {
     /**
      * Actual value of the field instance. The value type varies, depending on `__type`:
      * - For **classic types** (ie. Integer, Float, Boolean, String, Text and FilePath), you
-     * just get the actual value with the expected type.  - For **Color**, the value is an
-     * hexadecimal string using "#rrggbb" format.  - For **Enum**, the value is a String
-     * representing the selected enum value.  - For **Point**, the value is a
-     * [GridPoint](#ldtk-GridPoint) object.  - For **Tile**, the value is a
-     * [TilesetRect](#ldtk-TilesetRect) object.  - For **EntityRef**, the value is an
-     * [EntityReferenceInfos](#ldtk-EntityReferenceInfos) object.If the field is an
+     * just get the actual value with the expected type.   - For **Color**, the value is an
+     * hexadecimal string using "#rrggbb" format.   - For **Enum**, the value is a String
+     * representing the selected enum value.   - For **Point**, the value is a
+     * [GridPoint](#ldtk-GridPoint) object.   - For **Tile**, the value is a
+     * [TilesetRect](#ldtk-TilesetRect) object.   - For **EntityRef**, the value is an
+     * [EntityReferenceInfos](#ldtk-EntityReferenceInfos) object.  If the field is an
      * array, then this `__value` will also be a JSON array.
      */
     @JsonProperty("__value")

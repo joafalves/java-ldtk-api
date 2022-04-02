@@ -24,7 +24,7 @@ public class AutoLayerRuleDefinition {
     private double pivotX;
     private double pivotY;
     private long size;
-    private long[] tileIDS;
+    private long[] tileIds;
     private TileMode tileMode;
     private long uid;
     private long xModulo;
@@ -148,9 +148,9 @@ public class AutoLayerRuleDefinition {
      * Array of all the tile IDs. They are used randomly or as stamps, based on `tileMode` value.
      */
     @JsonProperty("tileIds")
-    public long[] getTileIDS() { return tileIDS; }
+    public long[] getTileIds() { return tileIds; }
     @JsonProperty("tileIds")
-    public void setTileIDS(long[] value) { this.tileIDS = value; }
+    public void setTileIds(long[] value) { this.tileIds = value; }
 
     /**
      * Defines how tileIds array is used Possible values: `Single`, `Stamp`

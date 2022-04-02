@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * Level background image position info
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class LevelBackgroundPosition {
     private double[] cropRect;
     private double[] scale;

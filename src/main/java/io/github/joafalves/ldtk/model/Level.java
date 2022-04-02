@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.*;
  * `externalRelPath` string points to the `ldtkl` file.  A `ldtkl` file is just a JSON file
  * containing exactly what is described below.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Level {
     private String bgColor;
     private LevelBackgroundPosition bgPos;
@@ -54,7 +53,7 @@ public class Level {
     public void setBgPos(LevelBackgroundPosition value) { this.bgPos = value; }
 
     /**
-     * An array listing all other levels touching this one on the world map. Only relevant
+     * An array listing all other levels touching this one on the world map.  Only relevant
      * for world layouts where level spatial positioning is manual (ie. GridVania, Free). For
      * Horizontal and Vertical layouts, this array is always empty.
      */
@@ -150,7 +149,7 @@ public class Level {
 
     /**
      * An array containing all Layer instances. **IMPORTANT**: if the project option "*Save
-     * levels separately*" is enabled, this field will be `null`. This array is **sorted
+     * levels separately*" is enabled, this field will be `null`.  This array is **sorted
      * in display order**: the 1st layer is the top-most and the last is behind.
      */
     @JsonProperty("layerInstances")
@@ -194,7 +193,7 @@ public class Level {
 
     /**
      * Index that represents the "depth" of the level in the world. Default is 0, greater means
-     * "above", lower means "below". This value is mostly used for display only and is
+     * "above", lower means "below".  This value is mostly used for display only and is
      * intended to make stacking of levels easier to manage.
      */
     @JsonProperty("worldDepth")
@@ -203,7 +202,7 @@ public class Level {
     public void setWorldDepth(long value) { this.worldDepth = value; }
 
     /**
-     * World X coordinate in pixels. Only relevant for world layouts where level spatial
+     * World X coordinate in pixels.  Only relevant for world layouts where level spatial
      * positioning is manual (ie. GridVania, Free). For Horizontal and Vertical layouts, the
      * value is always -1 here.
      */
@@ -213,7 +212,7 @@ public class Level {
     public void setWorldX(long value) { this.worldX = value; }
 
     /**
-     * World Y coordinate in pixels. Only relevant for world layouts where level spatial
+     * World Y coordinate in pixels.  Only relevant for world layouts where level spatial
      * positioning is manual (ie. GridVania, Free). For Horizontal and Vertical layouts, the
      * value is always -1 here.
      */

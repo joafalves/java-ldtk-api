@@ -1,7 +1,7 @@
 package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class EntityDefinition {
     private String color;
     private FieldDefinition[] fieldDefs;
@@ -22,11 +22,11 @@ public class EntityDefinition {
     private boolean resizableY;
     private boolean showName;
     private String[] tags;
-    private Long tileID;
+    private Long tileId;
     private double tileOpacity;
     private TilesetRectangle tileRect;
     private TileRenderMode tileRenderMode;
-    private Long tilesetID;
+    private Long tilesetId;
     private long uid;
     private long width;
 
@@ -113,8 +113,8 @@ public class EntityDefinition {
 
     /**
      * An array of 4 dimensions for the up/right/down/left borders (in this order) when using
-     * 9-slice mode for `tileRenderMode`. If the tileRenderMode is not NineSlice, then
-     * this array is empty. See: https://en.wikipedia.org/wiki/9-slice_scaling
+     * 9-slice mode for `tileRenderMode`.  If the tileRenderMode is not NineSlice, then
+     * this array is empty.  See: https://en.wikipedia.org/wiki/9-slice_scaling
      */
     @JsonProperty("nineSliceBorders")
     public long[] getNineSliceBorders() { return nineSliceBorders; }
@@ -182,9 +182,9 @@ public class EntityDefinition {
      * Replaced by: `tileRect`
      */
     @JsonProperty("tileId")
-    public Long getTileID() { return tileID; }
+    public Long getTileId() { return tileId; }
     @JsonProperty("tileId")
-    public void setTileID(Long value) { this.tileID = value; }
+    public void setTileId(Long value) { this.tileId = value; }
 
     @JsonProperty("tileOpacity")
     public double getTileOpacity() { return tileOpacity; }
@@ -213,9 +213,9 @@ public class EntityDefinition {
      * Tileset ID used for optional tile display
      */
     @JsonProperty("tilesetId")
-    public Long getTilesetID() { return tilesetID; }
+    public Long getTilesetId() { return tilesetId; }
     @JsonProperty("tilesetId")
-    public void setTilesetID(Long value) { this.tilesetID = value; }
+    public void setTilesetId(Long value) { this.tilesetId = value; }
 
     /**
      * Unique Int identifier

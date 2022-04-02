@@ -2,7 +2,6 @@ package io.github.joafalves.ldtk.model;
 
 import com.fasterxml.jackson.annotation.*;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class EntityInstance {
     private long[] grid;
     private String identifier;

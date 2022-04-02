@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.*;
  * all types, to make sure QuickType finds them and integrate all of them. Otherwise,
  * Quicktype will drop types that are not explicitely used.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class ForcedRefs {
     private AutoLayerRuleGroup autoLayerRuleGroup;
     private AutoLayerRuleDefinition autoRuleDef;

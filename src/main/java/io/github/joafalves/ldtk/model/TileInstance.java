@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * This structure represents a single tile from a given Tileset.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class TileInstance {
     private long[] d;
     private long f;

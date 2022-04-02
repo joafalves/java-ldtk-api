@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.*;
 /**
  * IntGrid value definition
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class IntGridValueDefinition {
     private String color;
     private String identifier;

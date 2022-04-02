@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TileCustomMetadata {
     private String data;
-    private long tileID;
+    private long tileId;
 
     @JsonProperty("data")
     public String getData() { return data; }
@@ -16,7 +16,7 @@ public class TileCustomMetadata {
     public void setData(String value) { this.data = value; }
 
     @JsonProperty("tileId")
-    public long getTileID() { return tileID; }
+    public long getTileId() { return tileId; }
     @JsonProperty("tileId")
-    public void setTileID(long value) { this.tileID = value; }
+    public void setTileId(long value) { this.tileId = value; }
 }
